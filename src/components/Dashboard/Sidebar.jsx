@@ -16,7 +16,7 @@ export default function Sidebar() {
     { id:5,title: "Settings", icon: <Settings width={20} /> },
   ];
   return (
-    <div className="  bg-[#000000ea]  w-64 h-screen  relative ">
+    <div className="  bg-[#000000]  w-64 h-screen relative border-r border-white/15 ">
       <h1 className="text-white pl-2 text-lg font-semibold p-7">Onboard</h1>
       <div className="flex flex-col  gap-1 p-1 ">
         {items.map((item) => (
