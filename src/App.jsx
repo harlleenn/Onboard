@@ -5,7 +5,7 @@ import viteLogo from '/vite.svg'
 import MainPage from './components/Spotlight/Spotlight'
 import Sidebar from './components/Dashboard/Sidebar'
 import Navbar from './components/Dashboard/Navbar'
-import Content from './components/Dashboard/Content'
+import Content from './components/Dashboard/main-content/Content'
 
 function App() {
   
