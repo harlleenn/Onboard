@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 // import './App.css'
-import MainPage from './components/Spotlight/Spotlight'
 import Sidebar from './components/Dashboard/Sidebar'
 import Navbar from './components/Dashboard/Navbar'
 import Content from './components/Dashboard/main-content/Content'
+import Spotlight from './components/Spotlight/Spotlight'
+import steps from './components/Spotlight/Steps'
 
 function App() {
+  const [tourActive, setTourActive] = useState(false)
   
 
   return (
@@ -16,10 +17,16 @@ function App() {
 
       <div className='flex flex-1 flex-col'>
           <Navbar/>
-          <Content/>
+          <Content onStartTour={() => setTourActive(true)}/>
       </div>
   
-
+{tourActive && (
+        <Spotlight
+          steps={steps}
+          onFinish={() => setTourActive(false)
+          }
+        />
+      )}
     </div>
   )
 }
