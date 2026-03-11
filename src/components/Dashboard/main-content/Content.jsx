@@ -19,7 +19,7 @@ export default function Content({onStartTour}) {
           </button>
         </div>
       </div>
-      <div className="flex flex-row mt-10 gap-4">
+      <div className="flex flex-row mt-10 gap-4" id='stats'>
         <Card 
         number="12" 
         title="Total Flows" 

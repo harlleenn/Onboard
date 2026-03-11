@@ -1,6 +1,7 @@
 const steps = [
-  {
-    target: "#sidebar",
+  
+ {
+    target: "#sideBar",
     title: "Navigate Your Workspace",
     description: "Access all your flows and analytics from here."
   },
@@ -19,6 +20,7 @@ const steps = [
     title: "Manage Your Flows",
     description: "See all your onboarding flows and their completion rates."
   },
+   
   {
     target: "#start-tour",
     title: "Create a New Tour",
