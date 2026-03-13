@@ -82,6 +82,7 @@ const handleKeydown = (e) => {
           handleStep={handleStep}
           nextStep={nextStep}
           position={position}
+          onFinish={onFinish}
         />
       </>
     )}
