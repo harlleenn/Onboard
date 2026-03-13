@@ -4,9 +4,11 @@ import Popup from "./Popup";
 export default function Spotlight({ steps, onFinish }) {
   const [position, setPosition] = useState(null);
   const [nextStep, setNextStep] = useState(0);
+
   const title = steps[nextStep].title;
   const description = steps[nextStep].description;
-  const target = steps[nextStep].target
+  const button = steps[nextStep].button;
+  const number = steps[nextStep].number
 
   useEffect(() => {
     const elements = document.querySelector(steps[nextStep].target);
@@ -14,9 +16,38 @@ export default function Spotlight({ steps, onFinish }) {
       const element = elements.getBoundingClientRect();
       setPosition(element);
       console.log(element);
+    }else{
+      
     }
   }, [nextStep]);
 
+const handleKeydown = (e) => {
+  if(e.key === "ArrowRight"){
+    if(nextStep === steps.length -1){
+      onFinish()
+    }else{
+      setNextStep((prev) => prev + 1)
+    }
+  }
+  if(e.key === "ArrowLeft"){
+    if(nextStep === 0){
+      onFinish()
+    return
+    }else{
+      setNextStep((prev) => prev-1)
+    }
+  }
+  if(e.key === "Escape"){
+    onFinish()
+  }
+}
+  useEffect(() => {
+    document.addEventListener("keydown",handleKeydown )
+    return () => {
+      document.removeEventListener("keydown", handleKeydown)
+    }
+  },[nextStep])
+ 
   if (!position) return null;
 
   const handleStep = () => {
@@ -26,6 +57,8 @@ export default function Spotlight({ steps, onFinish }) {
       setNextStep((prev) => prev + 1);
     }
   };
+
+
   const myStyle = {
     position: "fixed",
     top: position.top,
@@ -44,7 +77,8 @@ export default function Spotlight({ steps, onFinish }) {
         <Popup
           title={title}
           description={description}
-          target={target}
+          number={number}
+         button={button}
           handleStep={handleStep}
           nextStep={nextStep}
           position={position}

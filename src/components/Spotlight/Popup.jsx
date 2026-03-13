@@ -1,5 +1,5 @@
 import React from 'react'
-export default function Popup({title, description, target, handleStep, position }) {
+export default function Popup({title, description,button, handleStep, position, number }) {
   const viewportHeight = window.innerHeight
 const viewportWidth = window.innerWidth
 
@@ -28,18 +28,26 @@ const popoverLeft = isOnLeftEdge
   height: "25%",
   zIndex:60,
   color: "white",
-  // padding : 10, 
-  borderRadius: 25
+  borderRadius: 25,
+  transitionProperty : "all",
+  transitionDuration : "350ms"
+ 
+  
  }
 
   return (
     <div style={popOverlay}>
-   <div className='flex-col flex h-full p-3  justify-center gap-2 text-balance'>
+   <div className='flex-col flex h-full py-6 px-2 justify-center gap-2 text-balance'>
       <div className='text-lg font-semibold'>{title}</div>
        <div className='text-md text-gray-200'>{description}</div>
-       <div >
-        <button onClick={handleStep} 
-        className='bg-[#0d0d0daa] px-6 py-1 rounded-full text-white cursor-pointer'>Next</button>
+       <div  className=" flex ">
+        <div className='flex flex-col gap-2 px-2 '>
+           <button onClick={handleStep} 
+        className='bg-[#0d0d0daa]  
+        rounded-full text-white cursor-pointer px-6 py-1 '>{button}</button>
+        <div>Steps {number} / 5</div>
+        </div>
+       
        </div>
    </div>
      

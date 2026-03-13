@@ -13,8 +13,9 @@ export default function Content({onStartTour}) {
             Welcome back, Harleen. Here's what's happening.
           </p>
         </div>
-        <div className="flex justify-center items-center"id="start-tour">
-          <button className="text-white cursor-pointer bg-[#52158f] px-5 py-2 rounded-full font-semibold"onClick={onStartTour}>
+        <div className="flex justify-center items-center" id="start-tour">
+          <button className="text-black inset-shadow-2xs inset-shadow-amber-800 cursor-pointer 
+          bg-[#f3f2f3] px-5 py-2 rounded-full font-semibold" onClick={onStartTour}>
             Start tour
           </button>
         </div>
