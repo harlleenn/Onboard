@@ -36,21 +36,21 @@ export default function Spotlight({ steps, onFinish }) {
     zIndex: 40,
     backgroundColor:"rgb(255 255 255 / 0.1)",
   };
-  return (
-    <div>
-      {position && (
-        <div style={myStyle}>
-          <button onClick={handleStep} className="text-white  bg-pink-100">
-            Click for next
-          </button>
-          <Popup title={title}
-           description={description} 
-           target={target}
-           handleStep={handleStep}
-            nextStep={nextStep}
-            position={position} />
-        </div>
-      )}
-    </div>
-  );
+ return (
+  <div>
+    {position && (
+      <>
+        <div style={myStyle} />
+        <Popup
+          title={title}
+          description={description}
+          target={target}
+          handleStep={handleStep}
+          nextStep={nextStep}
+          position={position}
+        />
+      </>
+    )}
+  </div>
+);
 }

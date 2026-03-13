@@ -2,36 +2,47 @@ import React from 'react'
 export default function Popup({title, description, target, handleStep, position }) {
   const viewportHeight = window.innerHeight
 const viewportWidth = window.innerWidth
-// if element is in bottom half of screen, show popover ABOVE
+
 const showAbove = position.top > viewportHeight / 2
+const isOnLeftEdge = position.left < 100
+const isOnRightEdge = position.right > viewportWidth - 100
 const popoverTop = showAbove 
-  ? position.top - 120  // above the element
-  : position.top + position.height + 12  // below the element
-// if popover would overflow right, align it to right edge instead
-const popoverLeft = position.left + 280 > viewportWidth
+  ? position.top - 120
+  : position.top + 20  // slight offset from top of element
+const popoverLeft = isOnLeftEdge
+  ? position.left + position.width + 12  // right of element
+  : isOnRightEdge
+  ? position.left - 300  // left of element
+  : position.left + 280 > viewportWidth
   ? viewportWidth - 300
   : position.left
+
+
+
    const popOverlay = {
   position : "fixed",
   top: popoverTop,
   left: popoverLeft,
-  backgroundColor : "red",
+  backgroundColor : "rgb(255 255 255 / 0.5)",
   width: "15%",
-  height: 90,
+  height: "25%",
   zIndex:60,
   color: "white",
-  padding : 10, 
+  // padding : 10, 
   borderRadius: 25
  }
+
   return (
     <div style={popOverlay}>
-      <div>i am the {target}</div>
-       <div>{title}</div>
-       <div>{description}</div>
-       <div>
+   <div className='flex-col flex h-full p-3  justify-center gap-2 text-balance'>
+      <div className='text-lg font-semibold'>{title}</div>
+       <div className='text-md text-gray-200'>{description}</div>
+       <div >
         <button onClick={handleStep} 
-        className='bg-amber-100 w-full text-white'>Next</button>
+        className='bg-[#0d0d0daa] px-6 py-1 rounded-full text-white cursor-pointer'>Next</button>
        </div>
+   </div>
+     
        
     </div>
   )
