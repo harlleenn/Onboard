@@ -11,7 +11,7 @@ const steps = [
     title: "Search Anything",
     description: "Find any flow or user instantly.",
     button: "Next",
-     number: 2
+    number: 2
     
   },
   {

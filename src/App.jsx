@@ -9,9 +9,11 @@ import steps from "./components/Spotlight/Steps";
 
 function App() {
   const [tourActive, setTourActive] = useState(false);
-
+// const containerStyle = {
+//   width: "clamp(200px , 90vw, 280px)"
+// }
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen" >
       <Sidebar />
 
       <div className="flex flex-1 flex-col">
@@ -20,7 +22,10 @@ function App() {
       </div>
 
       {tourActive && (
-        <Spotlight steps={steps} onFinish={() => setTourActive(false)} />
+        <Spotlight 
+        steps={steps} 
+        onFinish={() => setTourActive(false)}
+        />
       )}
     </div>
   );
