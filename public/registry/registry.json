@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "onboard-ui",
+  "homepage": "https://github.com/harlleenn/Onboard",
+  "items": [
+    {
+      "name": "spotlight",
+      "type": "registry:component",
+      "title": "Spotlight",
+      "description": "A spotlight that highlights your elements for onboarding",
+      "url": "http://localhost:5173/registry/spotlight.json"
+    }
+  ]
+}
