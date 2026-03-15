@@ -12,7 +12,6 @@ export default function Popup({
 }) {
   const viewportHeight = window.innerHeight;
   const viewportWidth = window.innerWidth;
-
   const showAbove = position.top > viewportHeight / 2;
   const isOnLeftEdge = position.left < 10;
   const isOnRightEdge = position.right > viewportWidth - 100;
@@ -32,8 +31,8 @@ export default function Popup({
     backgroundColor: "var(--onboard-popover-bg, rgba(22,22,22,0.98))",
     zIndex: "var(--onboard-popover-z, 90)",
     color: "var(--onboard-popover-fg, white)",
-    borderRadius: "var(--onboard-popover-radius, 20px )",
-    padding: "var(--onboard-popover-padding , 12px)",
+    borderRadius: "var(--onboard-popover-radius, 20px)",
+    padding: "var(--onboard-popover-padding, 12px)",
     border: "var(--onboard-popover-border, 0.3px solid rgba(255, 255,255,0.1))",
     transitionProperty: "all",
     transitionDuration: "350ms",
@@ -49,7 +48,7 @@ export default function Popup({
             onClick={onFinish}
             type="button"
           >
-            <X />
+            <X/>
           </button>
           <div className="text-lg font-semibold">{title}</div>
           <div className="text-md text-gray-200">{description}</div>
@@ -62,7 +61,7 @@ export default function Popup({
                 onClick={handleStep}
                 type="button"
                 className="bg-[#0d0d0daa]  
-        rounded-full text-white cursor-pointer px-6 py-1 border-1 border-white/5 "
+                rounded-full text-white cursor-pointer px-6 py-1 border-1 border-white/5 "
               >
                 {button}
               </button>

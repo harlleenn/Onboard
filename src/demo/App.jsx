@@ -1,17 +1,12 @@
 import { useState } from "react";
-
-// import './App.css'
-import Sidebar from "./components/Dashboard/Sidebar";
+import Sidebar from './components/Dashboard/Sidebar'
 import Navbar from "./components/Dashboard/Navbar";
-import Content from "./components/Dashboard/main-content/Content";
-import Spotlight from "./components/Spotlight/Spotlight";
-import steps from "./components/Spotlight/Steps";
+import Content from './components/Dashboard/main-content/Content'
+import Spotlight from "../lib/components/Spotlight"
+import steps from "./Steps";
 
 function App() {
   const [tourActive, setTourActive] = useState(false);
-// const containerStyle = {
-//   width: "clamp(200px , 90vw, 280px)"
-// }
   return (
     <div className="flex h-screen" >
       <Sidebar />

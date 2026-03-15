@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Popup from "./Popup";
-import "./App.css";
 
 export default function Spotlight({ steps, onFinish }) {
   const [position, setPosition] = useState(null);
@@ -9,7 +8,6 @@ export default function Spotlight({ steps, onFinish }) {
   const title = steps[nextStep].title;
   const description = steps[nextStep].description;
   const button = steps[nextStep].button;
-  const number = steps[nextStep].number;
 
   useEffect(() => {
     const elements = document.querySelector(steps[nextStep].target);
@@ -64,7 +62,8 @@ export default function Spotlight({ steps, onFinish }) {
     left: position.left,
     width: position.width,
     height: position.height,
-    boxShadow: "var(--onboard-spotlight-shadow ,  0 0 0 9999px rgba(0,0,0,0.85))",
+    boxShadow:
+      "var(--onboard-spotlight-shadow ,  0 0 0 9999px rgba(0,0,0,0.85))",
     zIndex: "var(--onboard-spotlight-zIndex, 40)",
     backgroundColor: "var(--onboard-spotlight-bg, rgb(255 255 255 / 0.1))",
   };
@@ -77,7 +76,7 @@ export default function Spotlight({ steps, onFinish }) {
             <Popup
               title={title}
               description={description}
-              number={number}
+              number={nextStep + 1}
               button={button}
               totalSteps={steps.length}
               handleStep={handleStep}
