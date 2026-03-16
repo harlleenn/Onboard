@@ -63,7 +63,7 @@ export default function Spotlight({ steps, onFinish }) {
     width: position.width,
     height: position.height,
     boxShadow:
-      "var(--onboard-spotlight-shadow ,  0 0 0 9999px rgba(0,0,0,0.85))",
+      "var(--onboard-spotlight-shadow ,  0 0 0 9px rgba(0,0,0,0.85))",
     zIndex: "var(--onboard-spotlight-zIndex, 40)",
     backgroundColor: "var(--onboard-spotlight-bg, rgb(255 255 255 / 0.1))",
   };

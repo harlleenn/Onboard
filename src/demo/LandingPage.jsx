@@ -9,12 +9,21 @@ export default function LandingPage({
   setTourActive,
 }) {
   return (
-    <div className="min-h-svh bg-[#1b1a1a] flex flex-col items-center px-8 py-20">
+    <div className="min-h-svh bg-[#1b1a1a] flex flex-col items-center px-20 py-20">
       {/* Hero text */}
-      <div className="text-center     w-full h-50 text-white">
-        <h1>Guide your users.</h1>
-        <p>Without the complexity.</p>
-        <button onClick={onStartTour}>See demo</button>
+      <div className="px-6 py-1 text-white border-1 border-white/10 mb-5 flex flex-row gap-5 rounded-full">
+        <div>
+        shadcn registry
+        </div>
+        <div>open source</div>
+            
+        </div>
+      <div className="text-start text-balance  w-full h-64 text-white">
+        <h1 className="text-5xl/normal font-semibold">Guide your users.</h1>
+        <p className="text-md/normal text-gray-300">Drop it into any React app. Pass your steps. 
+Your users are guided.</p>
+        <button onClick={onStartTour} className="bg-white text-md mt-5 text-gray-500 
+        px-5 py-2 rounded-lg cursor-pointer">See demo</button>
       </div>
 
       {/* Product window */}
@@ -32,7 +41,9 @@ export default function LandingPage({
       </div>
 
       {tourActive && (
-        <Spotlight steps={steps} onFinish={() => setTourActive(false)} />
+        <Spotlight 
+        steps={steps} 
+        onFinish={() => setTourActive(false)} />
       )}
     </div>
   );

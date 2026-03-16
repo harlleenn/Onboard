@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Navbar() {
   return (
-    <div className=' bg-[#000000] w-full h-15 border-b border-white/15 relative '>
+    <div className=' bg-[#000000] w-full h-15 border-b border-white/15 relative p-3'>
         <div className='flex items-center justify-between h-full px-5'>
           <div id='search'>
              <input placeholder='Search' 
