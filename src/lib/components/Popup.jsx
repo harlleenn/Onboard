@@ -9,25 +9,29 @@ export default function Popup({
   number,
   onFinish,
   totalSteps,
+  ref
 }) {
   const viewportHeight = window.innerHeight;
   const viewportWidth = window.innerWidth;
-  const showAbove = position.top > viewportHeight / 2;
-  const isOnLeftEdge = position.left < 10;
-  const isOnRightEdge = position.right > viewportWidth - 100;
-  const popoverTop = showAbove ? position.top - 20 : position.top + 20; // slight offset from top of element
-  const popoverLeft = isOnLeftEdge
-    ? position.left + position.width + 12 // right of element
-    : isOnRightEdge
-      ? position.left - 300 // left of element
-      : position.left + 280 > viewportWidth
-        ? viewportWidth - 300
-        : position.left;
+
+  // const showAbove = position.top > viewportHeight / 2;
+  // const isOnLeftEdge = position.left < 10;
+  // const isOnRightEdge = position.right > viewportWidth - 100;
+
+
+  // const popoverTop = showAbove ? position.top - 20 : position.top + 20; // slight offset from top of element
+  // const popoverLeft = isOnLeftEdge
+  //   ? position.left + position.width + 12 // right of element
+  //   : isOnRightEdge
+  //     ? position.left - 300 // left of element
+  //     : position.left + 280 > viewportWidth
+  //       ? viewportWidth - 300
+  //       : position.left;
 
   const popoverStyle = {
     position: "fixed",
-    top: popoverTop,
-    left: popoverLeft,
+   top:position.y,
+   left:position.x,
     backgroundColor: "var(--onboard-popover-bg, rgba(22,22,22,0.98))",
     zIndex: "var(--onboard-popover-z, 90)",
     color: "var(--onboard-popover-fg, white)",
@@ -41,7 +45,7 @@ export default function Popup({
 
   return (
     <div data-popover="">
-      <div style={popoverStyle}>
+      <div style={popoverStyle} ref={ref}>
         <div className="flex-col flex h-full   justify-center gap-2 text-balance relative ">
           <button
             className=" cursor-pointer absolute top-0 right-0"

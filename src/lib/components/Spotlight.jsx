@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef} from "react";
 import Popup from "./Popup";
+import  {computePosition, flip, shift} from "@floating-ui/dom"
+
 
 export default function Spotlight({ steps, onFinish }) {
   const [position, setPosition] = useState(null);
@@ -9,16 +11,37 @@ export default function Spotlight({ steps, onFinish }) {
   const description = steps[nextStep].description;
   const button = steps[nextStep].button;
 
+const referenceRef = useRef(null);
+const floatingRef = useRef(null);
+
   useEffect(() => {
     const elements = document.querySelector(steps[nextStep].target);
     if (elements) {
       const element = elements.getBoundingClientRect();
       setPosition(element);
+      console.log(element)
     } else {
       setPosition(null);
     }
   }, [nextStep]);
 
+
+
+useEffect(() => {
+  async function updatePosition() {
+    if (!referenceRef.current || !floatingRef.current) return
+    
+    const position = await computePosition(referenceRef.current, floatingRef.current, {
+      placement: "left",
+      middleware: [offset(10),flip(), shift({padding: 2})]
+
+    });
+    // floatingRef.current.style.left = `${position.x}px`
+    // floatingRef.current.style.right = `${position.y}px`
+    console.log(position.middlewareData , position.y)
+  }
+  updatePosition()
+}, [nextStep, position])
   const handleKeydown = (e) => {
     if (e.key === "ArrowRight") {
       if (nextStep === steps.length - 1) {
@@ -72,8 +95,10 @@ export default function Spotlight({ steps, onFinish }) {
       {position && (
         <>
           <div data-spotlight="">
-            <div style={elementSpotlight} />
+            <div style={elementSpotlight} ref={referenceRef}/>
             <Popup
+            ref={floatingRef}
+            position={position}
               title={title}
               description={description}
               number={nextStep + 1}
@@ -81,7 +106,6 @@ export default function Spotlight({ steps, onFinish }) {
               totalSteps={steps.length}
               handleStep={handleStep}
               nextStep={nextStep}
-              position={position}
               onFinish={onFinish}
             />
           </div>
