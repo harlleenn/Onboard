@@ -1,16 +1,90 @@
-# React + Vite
+# Onboard UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Spotlight onboarding component for React. Guide your users through your app with beautiful spotlight effects.
 
-Currently, two official plugins are available:
+> Work in progress. Core functionality is stable.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+```bash
+npx shadcn add https://onboard-uii.vercel.app/registry/spotlight.json
+```
 
-## React Compiler
+## Usage
+```jsx
+import { useState } from 'react'
+import Spotlight from '@/components/spotlight/Spotlight'
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+const steps = [
+  {
+    target: "#my-element",
+    title: "Welcome",
+    description: "This is where you start.",
+    button: "Next"
+  }
+]
 
-## Expanding the ESLint configuration
+export default function App() {
+  const [active, setActive] = useState(false)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+  return (
+    <div>
+      <button id="my-element" onClick={() => setActive(true)}>
+        Start Tour
+      </button>
+
+      {active && (
+        <Spotlight
+          steps={steps}
+          onFinish={() => setActive(false)}
+        />
+      )}
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| steps | array | yes | Array of tour steps |
+| onFinish | function | yes | Called when tour ends or is skipped |
+| spotlightStyle | object | no | Override spotlight styles |
+| popoverStyle | object | no | Override popover card styles |
+
+## Step Object
+
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| target | string | yes | CSS selector of element to highlight |
+| title | string | yes | Popover heading |
+| description | string | yes | Popover body text |
+| button | string | no | Button label, defaults to Next |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `→` | Next step |
+| `←` | Previous step |
+| `Esc` | Close tour |
+
+## Customization
+
+Override default styles using CSS variables:
+```css
+[data-spotlight] {
+  --onboard-popover-bg: white;
+  --onboard-popover-fg: black;
+  --onboard-popover-radius: 8px;
+  --onboard-spotlight-shadow: 0 0 0 9px rgba(0,0,0,0.5);
+}
+```
+
+## Live Demo
+
+[onboard-uii.vercel.app](https://onboard-uii.vercel.app)
+
+## License
+
+MIT
