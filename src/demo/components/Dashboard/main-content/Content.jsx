@@ -5,7 +5,7 @@ import Table from "./Table";
 
 export default function Content({onStartTour}) {
   return (
-    <div className="bg-[#0a0a0a]  p-15 flex-1 overflow-y-clip ">
+    <div className="bg-[#000000c1]  p-15 flex-1 overflow-y-clip ">
       <div className="flex flex-row justify-between">
         <div className="flex flex-col">
           <h1 className="text-white font-bold text-2xl">Overview</h1>

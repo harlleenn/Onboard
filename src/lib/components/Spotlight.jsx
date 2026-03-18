@@ -1,7 +1,12 @@
-import React, { useEffect, useState , useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Popup from "./Popup";
-import  {computePosition, flip, shift} from "@floating-ui/dom"
-
+import {
+  computePosition,
+  flip,
+  shift,
+  offset,
+  autoPlacement,
+} from "@floating-ui/dom";
 
 export default function Spotlight({ steps, onFinish }) {
   const [position, setPosition] = useState(null);
@@ -11,37 +16,45 @@ export default function Spotlight({ steps, onFinish }) {
   const description = steps[nextStep].description;
   const button = steps[nextStep].button;
 
-const referenceRef = useRef(null);
-const floatingRef = useRef(null);
+  const referenceRef = useRef(null);
+  const floatingRef = useRef(null);
 
   useEffect(() => {
     const elements = document.querySelector(steps[nextStep].target);
     if (elements) {
       const element = elements.getBoundingClientRect();
       setPosition(element);
-      console.log(element)
+     
     } else {
       setPosition(null);
     }
   }, [nextStep]);
 
+  useEffect(() => {
+    async function updatePosition() {
+      if (!floatingRef.current) return;
 
+      const targetElement = document.querySelector(steps[nextStep].target);
+      if (!targetElement) return;
 
-useEffect(() => {
-  async function updatePosition() {
-    if (!referenceRef.current || !floatingRef.current) return
-    
-    const position = await computePosition(referenceRef.current, floatingRef.current, {
-      placement: "left",
-      middleware: [offset(10),flip(), shift({padding: 2})]
+      const { x, y } = await computePosition(
+        targetElement,
+        floatingRef.current,
+        {
+          placement: "left",
+          middleware: [offset(2), flip(), shift({ padding: 2 })],
+        },
+      );
 
-    });
-    // floatingRef.current.style.left = `${position.x}px`
-    // floatingRef.current.style.right = `${position.y}px`
-    console.log(position.middlewareData , position.y)
-  }
-  updatePosition()
-}, [nextStep, position])
+      Object.assign(floatingRef.current.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+      });
+    }
+
+    updatePosition();
+  }, [nextStep, position]);
+
   const handleKeydown = (e) => {
     if (e.key === "ArrowRight") {
       if (nextStep === steps.length - 1) {
@@ -85,20 +98,18 @@ useEffect(() => {
     left: position.left,
     width: position.width,
     height: position.height,
-    boxShadow:
-      "var(--onboard-spotlight-shadow ,  0 0 0 9px rgba(0,0,0,0.85))",
+    boxShadow: "var(--onboard-spotlight-shadow ,  0 0 0 9px rgba(0,0,0,0.85))",
     zIndex: "var(--onboard-spotlight-zIndex, 40)",
-    backgroundColor: "var(--onboard-spotlight-bg, rgb(255 255 255 / 0.1))",
+    backgroundColor: "var(--onboard-spotlight-bg, rgba(110, 109, 110, 0.17))",
   };
   return (
     <div>
       {position && (
         <>
           <div data-spotlight="">
-            <div style={elementSpotlight} ref={referenceRef}/>
+            <div style={elementSpotlight} ref={referenceRef} />
             <Popup
-            ref={floatingRef}
-            position={position}
+              ref={floatingRef}
               title={title}
               description={description}
               number={nextStep + 1}
