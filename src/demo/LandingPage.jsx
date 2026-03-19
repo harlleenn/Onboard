@@ -10,24 +10,24 @@ export default function LandingPage({
   setTourActive,
 }) {
   return (
-    <div className="min-h-svh bg-[#000000] flex flex-col items-center  py-20">
+    <div className="min-h-svh bg-[hsl(0,0%,0%)] flex flex-col items-center  py-20">
       <div className="text-center  text-balance  w-full h-64 text-white">
-        <h1 className="text-5xl/normal font-semibold">Guide your users.</h1>
-        <p className="text-md/normal text-gray-300">
+        <h1 className="text-3xl md:text-5xl mb-5 font-semibold text-[hsl(0,0%,95%)]">Guide your users.</h1>
+        <p className="text-md/normal text-[hsl(0,0%,70%)]">
           Drop it into any React app. Pass your steps. Your users are guided.
         </p>
-        <div className="flex flex-row justify-center gap-5 mt-5">
+        <div className=" flex flex-col max-w-xs mx-auto md:flex-row md:gap-5 justify-center  mt-5">
           <button
             onClick={onStartTour}
-            className="bg-white/10 hover:bg-[#525552aa] text-md mt-5 text-gray-500  transition duration-300
-        px-5 py-2 rounded-lg cursor-pointer"
+            className="bg-[hsl(0,0%,15%)] hover:bg-[hsl(0,0%,10%)] text-md mt-5 text-[hsl(0,0%,65%)] 
+             transition duration-300 px-5 py-2 rounded-lg cursor-pointer"
           >
             See demo
           </button>
           <button
             onClick={onStartTour}
-            className="bg-white text-md mt-5 text-gray-500 
-        px-5 py-2 rounded-lg cursor-pointer"
+            className="bg-[hsl(0,0%,95%)] text-md mt-5 text-[hsl(0,0%,1%)] 
+        px-5 py-2 rounded-lg cursor-pointer hover:bg-[hsl(0,0%,95%)] "
           >
             Get started
           </button>
@@ -35,8 +35,8 @@ export default function LandingPage({
       </div>
       {/* Product window */}
       <div
-        className="w-full max-w-7xl rounded-xl overflow-hidden 
-      border border-white/10 h-[700px] shadow-sm shadow-white"
+        className="w-full max-w-fit  md:max-w-7xl rounded-xl overflow-hidden 
+       h-[700px] border-1 border-[hsl(0,0%,25%)] shadow-sm shadow-white/10"
       >
         <div className=" h-screen flex flex-1 ">
           <Sidebar />

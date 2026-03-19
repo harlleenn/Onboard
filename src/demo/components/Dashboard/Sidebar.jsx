@@ -18,7 +18,7 @@ export default function Sidebar() {
   return (
   
       <div
-      className="  bg-[#000000]  w-64 h-screen relative border-r border-white/15 "id="sideBar"  >
+      className="  bg-[hsl(0,0%,4%)]  w-64 h-screen relative border-r border-white/15 "id="sideBar"  >
       <h1 className="text-white pl-2 text-lg font-semibold p-7">Onboard</h1>
       <div className="flex flex-col  gap-1 p-1"  >
         {items.map((item) => (
@@ -26,7 +26,7 @@ export default function Sidebar() {
             key={item.id}
             className={`flex flex-row gap-3  w-full h-[35px] text-center items-center  cursor-pointer transition-all duration-[0.10]
          rounded-sm pl-2
-          ${item.title === active ? "bg-[#272827aa] text-gray-100 border-l-1 border-white" : "text-gray-400  hover:text-gray-100 hover:bg-[#272827aa]"}`}
+          ${item.title === active ? "bg-[hsl(0,0%,10%)] text-gray-100 border-l-1 border-white" : "text-gray-400  hover:text-gray-100 hover:bg-[hsl(0,0%,10%)]"}`}
             onClick={() => setActive(item.title)}
           >
             {item.icon}

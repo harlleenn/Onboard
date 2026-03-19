@@ -3,9 +3,9 @@ import { Copy } from "lucide-react";
 import PropSection from "./PropSection";
 export default function DocSection() {
   return (
-    <div className="flex flex-col mt-10 text-white gap-5  mx-auto max-w-6xl  ">
+    <div className="flex flex-col mt-10 text-[hsl(0,0%,95%)] gap-5  mx-auto max-w-6xl  ">
       <h1 className="text-lg">Installation</h1>
-      <pre className="bg-[#151414e8] border border-white/10 rounded-lg p-2 overflow-x-auto">
+      <pre className="bg-[hsl(0,0%,5%)] border border-white/10 rounded-lg p-2 overflow-x-auto">
     
         <code className="text-sm text-gray-300 font-mono whitespace-pre flex flex-row justify-between">
           
@@ -19,14 +19,14 @@ export default function DocSection() {
         <h1 className="text-lg">Usage</h1>
         <div className="flex flex-col gap-5">
           <h1>Render the Spotlight in the root of your app.</h1>
-          <pre className="bg-[#151414e8] border border-white/10 rounded-lg p-2 overflow-x-auto mb-10">
+          <pre className="bg-[hsl(0,0%,5%)] border border-white/10 rounded-lg p-2 overflow-x-auto mb-10">
             <code className="text-sm text-gray-300 font-mono whitespace-pre flex flex-row justify-between">
               {` import Spotlight from '@/components/spotlight/Spotlight'`}
               <Copy width={20}/>
             </code>
           </pre>
           <div className="flex flex-row gap-5">
-              <pre className="bg-[#151414e8] border border-white/10 rounded-lg p-3 overflow-x-auto">
+              <pre className="bg-[hsl(0,0%,5%)] border border-white/10 rounded-lg p-3 overflow-x-auto">
             <div className="flex justify-end">
               <Copy width={20} />
             </div>

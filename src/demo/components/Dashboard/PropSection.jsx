@@ -1,6 +1,6 @@
  export default function PropSection () {
     return (
- <div className="flex flex-col gap-2">
+ <div className="flex  flex-col md:flex-col gap-2">
   <h2 className="text-lg font-semibold">Props</h2>
   <div className="border border-white/10 rounded-lg overflow-hidden">
     
