@@ -10,7 +10,7 @@ export default function LandingPage({
   setTourActive,
 }) {
   return (
-    <div className="min-h-svh bg-[#000000] flex flex-col items-center px-20 py-20">
+    <div className="min-h-svh bg-[#000000] flex flex-col items-center  py-20">
       <div className="text-center  text-balance  w-full h-64 text-white">
         <h1 className="text-5xl/normal font-semibold">Guide your users.</h1>
         <p className="text-md/normal text-gray-300">
