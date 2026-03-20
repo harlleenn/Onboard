@@ -1,11 +1,6 @@
-/* .main-container {
-  background-color: var(--color-bg-dark);
-  flex-grow: 1;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  gap: 2rem;
-}
+/* 
+
+
 .header {
   display: flex;
   flex-wrap: wrap;
@@ -36,3 +31,11 @@
   ---rounded: 1rem;
   ---border: white;
 } */ */
+.main-container {
+  background-color: var(--color-bg-dark);
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2rem;
+}
