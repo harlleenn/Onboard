@@ -1,0 +1,38 @@
+/* .main-container {
+  background-color: var(--color-bg-dark);
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2rem;
+}
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1rem;
+}
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.main-dashboard {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  border-radius: var(---rounded);
+  /* max-width: fit-content; */
+/* } */
+
+/* :root {
+  --parent: solid 4px #ffe537;
+  --child: solid 4px #537fe7;
+
+  --color-bg-dark: hsl(0, 0%, 0%);
+  --color-bg: hsl(0, 0%, 5%);
+  --color-bg-light: hsl(0, 0%, 10%);
+
+  ---rounded: 1rem;
+  ---border: white;
+} */ */

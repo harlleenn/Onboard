@@ -20,7 +20,7 @@
       { prop: "popoverStyle", type: "object", required: "no", desc: "Override popover styles" },
     ].map((row) => (
       <div key={row.prop} className="grid grid-cols-4 px-4 py-3 border-t border-white/5 text-sm hover:bg-white/5">
-        <span className="font-mono text-purple-400">{row.prop}</span>
+        <span className="font-mono text-gray-400">{row.prop}</span>
         <span className="text-gray-400">{row.type}</span>
         <span className="text-gray-400">{row.required}</span>
         <span className="text-gray-300">{row.desc}</span>
