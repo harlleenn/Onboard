@@ -38,13 +38,13 @@ export default function LandingPage({onStartTour,tourActive,setTourActive} : Tou
           >
             See demo
           </button>
-          <button
+          {/* <button
             // onClick={onStartTour}
             className="bg-[hsl(0,0%,95%)] text-sm md:text-md mt-3 sm:mt-5 text-[hsl(0,0%,1%)] 
             px-5 py-2 rounded-lg cursor-pointer hover:bg-[hsl(0,0%,95%)] w-full sm:w-auto"
           >
             Get started
-          </button>
+          </button> */}
         </div>
       </div>
 
