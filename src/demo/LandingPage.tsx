@@ -5,12 +5,12 @@ import Spotlight from "../lib/components/Spotlight";
 import steps from "../lib/components/Steps";
 import DocSection from "./components/Dashboard/DocSection";
 import "./App.css";
-
-export default function LandingPage({
-  onStartTour,
-  tourActive,
-  setTourActive,
-}) {
+interface Tour {
+  onStartTour: () => void
+  tourActive : boolean
+  setTourActive : (value : boolean) => void
+}
+export default function LandingPage({onStartTour,tourActive,setTourActive} : Tour) {
   return (
     <div className="min-h-svh max-w-full bg-[hsl(0,0%,0%)] flex flex-col items-center py-10 md:py-20 px-4 main-container">
       
@@ -58,7 +58,7 @@ export default function LandingPage({
       <DocSection />
 
       {tourActive && (
-        <Spotlight steps={steps} onFinish={() => setTourActive(false)} />
+        <Spotlight steps={steps} onFinish={()  => setTourActive(false)} />
       )}
     </div>
   );

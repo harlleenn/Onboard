@@ -1,39 +1,47 @@
 import React, { useEffect, useState, useRef } from "react";
 import Popup from "./Popup";
-import {
-  computePosition,
-  flip,
-  shift,
-  offset,
-  autoPlacement,
-} from "@floating-ui/dom";
+import { computePosition, flip, shift, offset } from "@floating-ui/dom";
 
-export default function Spotlight({ steps, onFinish }) {
-  const [position, setPosition] = useState(null);
-  const [nextStep, setNextStep] = useState(0);
+interface Step {
+  target: string
+  title: string
+  description: string
+  button: string
+  number: number
+}
+
+interface SpotlightProps {
+  steps: Step[]
+  onFinish: () => void
+}
+
+export default function Spotlight({ steps, onFinish }: SpotlightProps) {
+  const [position, setPosition] = useState<DOMRect | null>(null);
+  const [nextStep, setNextStep] = useState<number>(0);
 
   const title = steps[nextStep].title;
   const description = steps[nextStep].description;
   const button = steps[nextStep].button;
 
-  const referenceRef = useRef(null);
-  const floatingRef = useRef(null);
+  const referenceRef = useRef<HTMLDivElement>(null);
+  const floatingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const elements = document.querySelector(steps[nextStep].target);
     if (elements) {
       const element = elements.getBoundingClientRect();
       setPosition(element);
-     
     } else {
       setPosition(null);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn(`Spotlight: target "${steps[nextStep].target}" not found in the DOM`)
+      }
     }
   }, [nextStep]);
 
   useEffect(() => {
     async function updatePosition() {
       if (!floatingRef.current) return;
-
       const targetElement = document.querySelector(steps[nextStep].target);
       if (!targetElement) return;
 
@@ -43,7 +51,7 @@ export default function Spotlight({ steps, onFinish }) {
         {
           placement: "left",
           middleware: [offset(2), flip(), shift({ padding: 2 })],
-        },
+        }
       );
 
       Object.assign(floatingRef.current.style, {
@@ -55,27 +63,28 @@ export default function Spotlight({ steps, onFinish }) {
     updatePosition();
   }, [nextStep, position]);
 
-  const handleKeydown = (e) => {
-    if (e.key === "ArrowRight") {
-      if (nextStep === steps.length - 1) {
-        onFinish();
-      } else {
-        setNextStep((prev) => prev + 1);
-      }
-    }
-    if (e.key === "ArrowLeft") {
-      if (nextStep === 0) {
-        onFinish();
-        return;
-      } else {
-        setNextStep((prev) => prev - 1);
-      }
-    }
-    if (e.key === "Escape") {
-      onFinish();
-    }
-  };
   useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") {
+        if (nextStep === steps.length - 1) {
+          onFinish();
+        } else {
+          setNextStep((prev) => prev + 1);
+        }
+      }
+      if (e.key === "ArrowLeft") {
+        if (nextStep === 0) {
+          onFinish();
+          return;
+        } else {
+          setNextStep((prev) => prev - 1);
+        }
+      }
+      if (e.key === "Escape") {
+        onFinish();
+      }
+    };
+
     document.addEventListener("keydown", handleKeydown);
     return () => {
       document.removeEventListener("keydown", handleKeydown);
@@ -93,34 +102,32 @@ export default function Spotlight({ steps, onFinish }) {
   };
 
   const elementSpotlight = {
-    position: "fixed",
+    position: "fixed" as const,
     top: position.top,
     left: position.left,
     width: position.width,
     height: position.height,
-    boxShadow: "var(--onboard-spotlight-shadow ,  0 0 0 9px rgba(0,0,0,0.85))",
+    boxShadow: "var(--onboard-spotlight-shadow, 0 0 0 9px rgba(0,0,0,0.85))",
     zIndex: "var(--onboard-spotlight-zIndex, 40)",
     backgroundColor: "var(--onboard-spotlight-bg, rgba(110, 109, 110, 0.17))",
   };
+
   return (
     <div>
       {position && (
-        <>
-          <div data-spotlight="">
-            <div style={elementSpotlight} ref={referenceRef} />
-            <Popup
-              ref={floatingRef}
-              title={title}
-              description={description}
-              number={nextStep + 1}
-              button={button}
-              totalSteps={steps.length}
-              handleStep={handleStep}
-              nextStep={nextStep}
-              onFinish={onFinish}
-            />
-          </div>
-        </>
+        <div data-spotlight="">
+          <div style={elementSpotlight} ref={referenceRef} />
+          <Popup
+            ref={floatingRef}
+            title={title}
+            description={description}
+            number={nextStep + 1}
+            button={button}
+            totalSteps={steps.length}
+            handleStep={handleStep}
+            onFinish={onFinish}
+          />
+        </div>
       )}
     </div>
   );

@@ -3,7 +3,7 @@ import { useState } from "react";
 import LandingPage from "./LandingPage";
 
 function App() {
-  const [tourActive, setTourActive] = useState(false);
+  const [tourActive, setTourActive] = useState<boolean>(false);
   return (
   <>
  <LandingPage
