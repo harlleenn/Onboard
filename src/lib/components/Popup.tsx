@@ -37,7 +37,7 @@ const Popup = forwardRef<HTMLDivElement, PopupProps>(({
     border: "var(--onboard-popover-border, 0.3px solid rgba(255, 255,255,0.1))",
     transitionProperty: "all",
     transitionDuration: "350ms",
-    width: "clamp(100px, 90vw, 280px)",
+    width: "clamp(100px, 70vw, 280px)",
   };
 
   return (

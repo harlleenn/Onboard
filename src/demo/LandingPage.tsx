@@ -5,6 +5,7 @@ import Spotlight from "../lib/components/Spotlight";
 import steps from "../lib/components/Steps";
 import DocSection from "./components/Dashboard/DocSection";
 import {motion} from 'motion/react'
+
 // import "./App.css";
 interface Tour {
   onStartTour: () => void
@@ -38,7 +39,7 @@ export default function LandingPage({onStartTour,tourActive,setTourActive} : Tou
             See demo
           </button>
           <button
-            onClick={onStartTour}
+            // onClick={onStartTour}
             className="bg-[hsl(0,0%,95%)] text-sm md:text-md mt-3 sm:mt-5 text-[hsl(0,0%,1%)] 
             px-5 py-2 rounded-lg cursor-pointer hover:bg-[hsl(0,0%,95%)] w-full sm:w-auto"
           >
