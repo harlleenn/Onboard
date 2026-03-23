@@ -4,6 +4,7 @@ import Content from "./components/Dashboard/main-content/Content";
 import Spotlight from "../lib/components/Spotlight";
 import steps from "../lib/components/Steps";
 import DocSection from "./components/Dashboard/DocSection";
+import {motion} from 'motion/react'
 // import "./App.css";
 interface Tour {
   onStartTour: () => void
@@ -12,19 +13,23 @@ interface Tour {
 }
 export default function LandingPage({onStartTour,tourActive,setTourActive} : Tour) {
   return (
-    <div className=" min-h-screen w-full overflow-x-hidden bg-[hsl(0,0%,0%)] flex flex-col items-center py-10 md:py-20 px-4 ">
+    <div className=" min-h-screen w-full overflow-x-hidden bg-[hsl(0,0%,10%)]  flex flex-col items-center py-20 md:py-20 px-4 ">
       
-      <div className="text-center w-full sm:w-full md:max-w-3xl  text-white">
-        <div className="header">
+      <div className="text-center w-full py-10 md:py-5 sm:w-full md:max-w-3xl  text-white">
+        <motion.div 
+        initial={{opacity: 0}}
+        animate={{opacity:1 }}
+
+        className="header">
           <h1 className="text-2xl sm:text-3xl md:text-5xl mb-5 font-semibold text-[hsl(0,0%,95%)]">
             Guide your users.
           </h1>
           <p className="text-sm sm:text-md md:text-lg text-[hsl(0,0%,70%)]">
             Drop it into any React app. Pass your steps. Your users are guided.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col sm:flex-row max-w-xs sm:max-w-md mx-auto sm:gap-5 justify-center mt-5 buttons">
+        <div className="flex flex-col sm:flex-row max-w-xs sm:max-w-xs mx-auto sm:gap-5 justify-center mt-5 ">
           <button
             onClick={onStartTour}
             className="bg-[hsl(0,0%,15%)] hover:bg-[hsl(0,0%,10%)] text-sm md:text-md mt-3 sm:mt-5 text-[hsl(0,0%,65%)] 

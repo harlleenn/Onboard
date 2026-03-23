@@ -4,11 +4,12 @@ import PropSection from "./PropSection";
 
 export default function DocSection() {
   return (
-    <div className="flex flex-col mt-10 text-[hsl(0,0%,95%)] gap-5 flex-1 ">
+    <div className="flex flex-col mt-10 text-[hsl(0,0%,95%)] gap-5 flex-1 max-w-full text-pretty text-wrap">
       <h1 className="text-base md:text-lg">Installation</h1>
-      <pre className="bg-[hsl(0,0%,5%)] border border-white/10 rounded-lg p-2 overflow-x-auto">
-        <code className="text-xs md:text-sm text-gray-300 font-mono whitespace-pre flex items-center justify-between gap-3">
-          <span className="break-all">
+      <pre className="bg-[hsl(0,0%,5%)] border border-white/10 rounded-lg p-1 md:p-2 ">
+        <code className="text-xs md:text-sm text-gray-300 font-mono whitespace-pre flex items-center 
+        justify-between gap-3 ">
+          <span className="break-all whitespace-pre-wrap">
             {`npx shadcn add https://onboard-uii.vercel.app/registry/spotlight.json`}
           </span>
           <div className="cursor-pointer shrink-0">
@@ -36,11 +37,11 @@ export default function DocSection() {
 
           <div className="flex flex-col lg:flex-row gap-5">
             
-            <pre className="bg-[hsl(0,0%,5%)] border border-white/10 rounded-lg p-3 overflow-x-auto w-full">
+            <pre className="bg-[hsl(0,0%,5%)] border border-white/10 rounded-lg p-3 overflow-x-auto md:overflow-x-hidden w-full">
               <div className="flex justify-end">
                 <Copy className="w-4 h-4 md:w-5 md:h-5" />
               </div>
-              <code className="text-xs md:text-sm text-gray-300 font-mono whitespace-pre">
+              <code className="text-xs md:text-sm text-gray-300 font-mono ">
 {`function App() {
   const [active, setActive] = useState(false)
 
