@@ -8,6 +8,7 @@ interface Step {
   description: string
   button: string
   number: number
+  backbtn: string
 }
 
 interface SpotlightProps {
@@ -16,18 +17,23 @@ interface SpotlightProps {
 }
 
 export default function Spotlight({ steps, onFinish }: SpotlightProps) {
+ 
   const [position, setPosition] = useState<DOMRect | null>(null);
   const [nextStep, setNextStep] = useState<number>(0);
+
 
   const title = steps[nextStep].title;
   const description = steps[nextStep].description;
   const button = steps[nextStep].button;
+  const backbtn = steps[nextStep].backbtn
 
   const referenceRef = useRef<HTMLDivElement>(null);
   const floatingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+
     const elements = document.querySelector(steps[nextStep].target);
+
     if (elements) {
       const element = elements.getBoundingClientRect();
       setPosition(element);
@@ -92,14 +98,25 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
   }, [nextStep]);
 
   if (!position) return null;
+  
 
   const handleStep = () => {
+    
     if (nextStep === steps.length - 1) {
       onFinish();
     } else {
       setNextStep((prev) => prev + 1);
     }
   };
+  const handleback = () => {
+    if (nextStep === steps.length - 1){
+      onFinish()
+    }else {
+        setNextStep((prev) => prev - 1)
+    }
+    
+  }
+
 
   const elementSpotlight = {
     position: "fixed" as const,
@@ -123,9 +140,11 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
             description={description}
             number={nextStep + 1}
             button={button}
+            backbtn={backbtn}
             totalSteps={steps.length}
             handleStep={handleStep}
             onFinish={onFinish}
+            handleback={handleback}
           />
         </div>
       )}

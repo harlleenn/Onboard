@@ -4,6 +4,7 @@ const steps = [
     title: "Navigate Your Workspace",
     description: "Access all your flows and analytics from here.",
     button: "Next",
+     backbtn: "Back",
     number: 1
   },
   {
@@ -11,6 +12,7 @@ const steps = [
     title: "Search Anything",
     description: "Find any flow or user instantly.",
     button: "Next",
+     backbtn: "Back",
     number: 2
     
   },
@@ -19,6 +21,7 @@ const steps = [
     title: "Track Your Progress",
     description: "Monitor your onboarding performance at a glance.",
     button: "Next",
+    backbtn: "Back",
      number: 3
   },
   {
@@ -26,6 +29,7 @@ const steps = [
     title: "Manage Your Flows",
     description: "See all your onboarding flows and their completion rates.",
     button: "Next",
+     backbtn: "Back",
      number: 4
   },
    
@@ -34,6 +38,7 @@ const steps = [
     title: "Create a New Tour",
     description: "Build a new onboarding experience for your users.",
     button: "Next",
+     backbtn: "Back",
      number: 5
   }
 ]

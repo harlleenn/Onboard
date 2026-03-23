@@ -4,7 +4,7 @@ import Content from "./components/Dashboard/main-content/Content";
 import Spotlight from "../lib/components/Spotlight";
 import steps from "../lib/components/Steps";
 import DocSection from "./components/Dashboard/DocSection";
-import "./App.css";
+// import "./App.css";
 interface Tour {
   onStartTour: () => void
   tourActive : boolean
@@ -12,9 +12,9 @@ interface Tour {
 }
 export default function LandingPage({onStartTour,tourActive,setTourActive} : Tour) {
   return (
-    <div className="min-h-svh max-w-full bg-[hsl(0,0%,0%)] flex flex-col items-center py-10 md:py-20 px-4 main-container">
+    <div className=" min-h-screen w-full overflow-x-hidden bg-[hsl(0,0%,0%)] flex flex-col items-center py-10 md:py-20 px-4 ">
       
-      <div className="text-center w-full max-w-3xl text-white">
+      <div className="text-center w-full sm:w-full md:max-w-3xl  text-white">
         <div className="header">
           <h1 className="text-2xl sm:text-3xl md:text-5xl mb-5 font-semibold text-[hsl(0,0%,95%)]">
             Guide your users.

@@ -1,24 +1,30 @@
 import React, { forwardRef } from "react";
 import { X } from "lucide-react";
+import {AnimatePresence, motion} from 'motion/react'
 
 interface PopupProps {
   title: string
   description: string
   button: string
+  backbtn: string
   handleStep: () => void
   number: number
   onFinish: () => void
   totalSteps: number
+  handleback : () => void
 }
 
 const Popup = forwardRef<HTMLDivElement, PopupProps>(({
   title,
   description,
   button,
+  backbtn,
   handleStep,
   number,
   onFinish,
-  totalSteps
+  totalSteps, 
+  handleback
+
 }, ref) => {
 
   const popoverStyle = {
@@ -31,12 +37,15 @@ const Popup = forwardRef<HTMLDivElement, PopupProps>(({
     border: "var(--onboard-popover-border, 0.3px solid rgba(255, 255,255,0.1))",
     transitionProperty: "all",
     transitionDuration: "350ms",
-    width: "clamp(200px, 90vw, 280px)",
+    width: "clamp(100px, 90vw, 280px)",
   };
 
   return (
     <div data-popover="">
-      <div style={popoverStyle} ref={ref}>
+      <AnimatePresence>
+         <motion.div 
+    
+      style={popoverStyle} ref={ref}>
         <div className="flex-col flex h-full justify-center gap-2 text-balance relative">
           <button
             className="cursor-pointer absolute top-0 right-0"
@@ -50,6 +59,12 @@ const Popup = forwardRef<HTMLDivElement, PopupProps>(({
           <div className="flex mt-5">
             <div className="flex flex-row w-full justify-between p-1">
               <div>Steps {number} of {totalSteps}</div>
+                <button 
+              onClick={handleback}
+              type="button"
+              className="bg-[#0d0d0daa] rounded-full text-white cursor-pointer px-6 py-1 border-1 border-white/5">
+                {backbtn}
+              </button>
               <button
                 onClick={handleStep}
                 type="button"
@@ -57,10 +72,13 @@ const Popup = forwardRef<HTMLDivElement, PopupProps>(({
               >
                 {button}
               </button>
+            
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
+      </AnimatePresence>
+     
     </div>
   );
 })

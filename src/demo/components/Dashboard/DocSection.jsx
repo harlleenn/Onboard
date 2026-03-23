@@ -4,10 +4,8 @@ import PropSection from "./PropSection";
 
 export default function DocSection() {
   return (
-    <div className="flex flex-col mt-10 text-[hsl(0,0%,95%)] gap-5 px-4 md:px-6 mx-auto max-w-6xl">
-      
+    <div className="flex flex-col mt-10 text-[hsl(0,0%,95%)] gap-5 flex-1 ">
       <h1 className="text-base md:text-lg">Installation</h1>
-
       <pre className="bg-[hsl(0,0%,5%)] border border-white/10 rounded-lg p-2 overflow-x-auto">
         <code className="text-xs md:text-sm text-gray-300 font-mono whitespace-pre flex items-center justify-between gap-3">
           <span className="break-all">
@@ -28,7 +26,7 @@ export default function DocSection() {
           </h1>
 
           <pre className="bg-[hsl(0,0%,5%)] border border-white/10 rounded-lg p-2 overflow-x-auto">
-            <code className="text-xs md:text-sm text-gray-300 font-mono whitespace-pre flex items-center justify-between gap-3">
+            <code className="text-xs md:text-sm text-gray-300 font-mono whitespace-pre-wrap break-all flex items-center justify-between gap-3">
               <span className="break-all">
                 {` import Spotlight from '@/components/spotlight/Spotlight'`}
               </span>
