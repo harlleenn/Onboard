@@ -3,17 +3,19 @@ import React, { useState } from "react";
 export default function Table({ name, status, users, completion }) {
   return (
     <div
-      className="grid  grid-cols-3 gap-5  justify-center items-center md:grid-cols-4 px-4 py-4
-      border-b border-white/5 hover:bg-white/5 text-white"
-     
+      className="grid gap-10 grid-cols-3 justify-betweem  items-center md:grid-cols-4 px-4 border-b border-white/5 hover:bg-white/5 text-white"
     >
       <span>{name}</span>
-      <div className="flex flex-row  items-center gap-2">
+      <div className="flex flex-row  items-center gap-10">
         <span
           className={` 
   `}
         />
-        <span className={`text-sm  h-auto px-2 py-1 rounded-full    ${status === "Active" ? "bg-[#0bf20baa]" : "bg-gray-500"} `}>{status}</span>
+        <span
+          className={`text-sm  h-auto px-2 py-1 rounded-full    ${status === "Active" ? "bg-[#56ff56aa]" : "bg-gray-500"} `}
+        >
+          {status}
+        </span>
       </div>
 
       <span>{users}</span>

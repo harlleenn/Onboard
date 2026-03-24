@@ -3,10 +3,17 @@ import Card from "./Card";
 import Table from "./Table";
 
 export default function Content({ onStartTour }) {
+    const flows = [
+  { name: "Meeting_Notes_2023-10-01.txt", status: "Active", users: "2.5 GB", completion: "5 mins ago" },
+  { name: "Data_Analysis_Results.jpg", status: "Active", users: "1.2 GB", completion: "20 mins ago" },
+  { name: "Report_2023_Q1.pdf", status: "Draft", users: "150 MB", completion: "30 mins ago" },
+  { name: "Invoice_#5678.docx", status: "Active", users: "300 MB", completion: "45 mins ago" },
+  { name: "Project Overview Presentation.ppt", status: "Active", users: "1.2 MB", completion: "23 mins ago" },
+]
   return (
     <div className="bg-[hsl(0,0%,3%)] p-5 md:p-10 lg:p-15 flex-1 overflow-y-auto">
       
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-5">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
         <div className="flex flex-col">
           <h1 className="text-white font-bold text-xl md:text-2xl">Overview</h1>
           <p className="text-gray-400 text-sm md:text-lg">
@@ -26,7 +33,7 @@ export default function Content({ onStartTour }) {
       </div>
 
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10 gap-4"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-5 gap-4 border border-white/10 border-t-2 border-t-white/30 rounded-xl p-6"
         id="stats"
       >
         <Card number="12" title="Total Flows" sublabel="+2 this month" />
@@ -49,52 +56,46 @@ export default function Content({ onStartTour }) {
 
         <div className="hidden md:grid grid-cols-4 px-4 py-3 border-b border-white/5 text-white text-sm md:text-lg">
           <span>Name</span>
-          <span>Status</span>
-          <span>Users</span>
-          <span>Completion</span>
+          <span>Sharing</span>
+          <span>Size</span>
+          <span>Modified</span>
         </div>
 
         <div className="flex flex-col gap-3 md:hidden">
-          <Table
-            name="Signup Onboarding"
+          <div className="flex mr-10 bg-">
+               <Table
+            name="Docs"
             status="Active"
             users="842"
             completion="72%"
           />
+          </div>
+       
           <Table
-            name="Feature Discovery "
+            name="Fonts "
             status="Active"
             users="301"
             completion="58%"
           />
           <Table
-            name="Mobile Walkthrough "
+            name="Source "
             status="Draft"
             users="0"
             completion="-"
           />
         </div>
 
-        <div className="hidden md:block">
-          <Table
-            name="Signup Onboarding"
-            status="Active"
-            users="842"
-            completion="72%"
-          />
-          <Table
-            name="Feature Discovery "
-            status="Active"
-            users="301"
-            completion="58%"
-          />
-          <Table
-            name="Mobile Walkthrough "
-            status="Draft"
-            users="0"
-            completion="-"
-          />
-        </div>
+      <div className="hidden md:block flex flex-col gap-10">
+  {flows.map((flow) => (
+    <Table
+      key={flow.name}
+      name={flow.name}
+      status={flow.status}
+      users={flow.users}
+      completion={flow.completion}
+    />
+  ))}
+</div>
       </div>
     </div>
   );

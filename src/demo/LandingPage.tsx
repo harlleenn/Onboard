@@ -6,7 +6,7 @@ import steps from "../lib/components/Steps";
 import DocSection from "./components/Dashboard/DocSection";
 import {motion} from 'motion/react'
 
-// import "./App.css";
+import "./App.css";
 interface Tour {
   onStartTour: () => void
   tourActive : boolean
@@ -14,9 +14,9 @@ interface Tour {
 }
 export default function LandingPage({onStartTour,tourActive,setTourActive} : Tour) {
   return (
-    <div className=" min-h-screen w-full overflow-x-hidden bg-[hsl(0,0%,10%)]  flex flex-col items-center py-20 md:py-20 px-4 ">
-      
-      <div className="text-center w-full py-10 md:py-5 sm:w-full md:max-w-3xl  text-white">
+    <div className=" min-h-screen w-full
+     overflow-x-hidden bg-[hsl(0,0%,10%)]  flex flex-col items-center py-20 md:py-20 px-4 "  >
+      <div className="text-center w-full py-10 md:py-5 sm:w-full md:max-w-3xl  text-white" >
         <motion.div 
         initial={{opacity: 0}}
         animate={{opacity:1 }}
@@ -50,8 +50,8 @@ export default function LandingPage({onStartTour,tourActive,setTourActive} : Tou
 
       <div
         className="w-full max-w-full md:max-w-7xl rounded-xl overflow-hidden 
-        min-h-[500px] md:h-[700px] border border-[hsl(0,0%,25%)] shadow-sm shadow-white/10 mt-10"
-      >
+        min-h-[600px] md:h-[700px] border border-[hsl(0,0%,25%)] shadow-sm shadow-white/10 mt-10"
+      id="landing-page">
         <div className="min-h-0 flex flex-1">
           <Sidebar />
           <div className="flex flex-1 flex-col">

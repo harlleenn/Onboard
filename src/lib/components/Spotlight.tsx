@@ -45,9 +45,11 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
 
   useEffect(() => {
     const elements = document.querySelector(steps[nextStep].target);
+    elements?.scrollIntoView()
     if (elements) {
       const elementPosition = elements.getBoundingClientRect();
       setPosition(elementPosition);
+      
       // Update spring values — they will animate to new position
       x.set(elementPosition.left)
       y.set(elementPosition.top)
@@ -64,17 +66,17 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
     async function updatePosition() {
       if (!floatingRef.current) return;
       const targetElement = document.querySelector(steps[nextStep].target);
+      
       if (!targetElement) return;
-
       const { x, y } = await computePosition(
         targetElement,
         floatingRef.current,
         {
-          placement: "bottom",
+          placement: "top",
           middleware: 
-          [offset(12), 
+          [offset(2), 
             flip(), 
-            shift({ padding: 12})],
+            shift({ padding: 5})],
         }
       );
 
