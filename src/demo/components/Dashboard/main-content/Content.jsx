@@ -4,14 +4,14 @@ import Table from "./Table";
 
 export default function Content({ onStartTour }) {
     const flows = [
-  { name: "Meeting_Notes_2023-10-01.txt", status: "Active", users: "2.5 GB", completion: "5 mins ago" },
-  { name: "Data_Analysis_Results.jpg", status: "Active", users: "1.2 GB", completion: "20 mins ago" },
-  { name: "Report_2023_Q1.pdf", status: "Draft", users: "150 MB", completion: "30 mins ago" },
-  { name: "Invoice_#5678.docx", status: "Active", users: "300 MB", completion: "45 mins ago" },
-  { name: "Project Overview Presentation.ppt", status: "Active", users: "1.2 MB", completion: "23 mins ago" },
+  {id:1 , name: "Isgnup Onboarding", status: "Active", users: "2.5 GB", completion: "50%" },
+  { id:2, name: "Feature Discovery", status: "Active", users: "1.2 GB", completion: "20%" },
+  {id:3,  name: "Mobile Walkthorugh", status: "Draft", users: "150 MB", completion: "30%" },
+  
+
 ]
   return (
-    <div className="bg-[hsl(0,0%,3%)] p-5 md:p-10 lg:p-15 flex-1 overflow-y-auto">
+    <div className="bg-[hsl(0,0%,3%)] p-5 md:p-10 lg:p-15 flex-1 overflow-y-auto gap-10">
       
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
         <div className="flex flex-col">
@@ -54,41 +54,17 @@ export default function Content({ onStartTour }) {
           Recent Flows
         </h1>
 
-        <div className="hidden md:grid grid-cols-4 px-4 py-3 border-b border-white/5 text-white text-sm md:text-lg">
+        <div className=" grid grid-cols-4  px-4 py-3 border-b border-white/5 text-white text-sm md:text-lg">
           <span>Name</span>
           <span>Sharing</span>
           <span>Size</span>
           <span>Modified</span>
         </div>
 
-        <div className="flex flex-col gap-3 md:hidden">
-          <div className="flex mr-10 bg-">
-               <Table
-            name="Docs"
-            status="Active"
-            users="842"
-            completion="72%"
-          />
-          </div>
-       
-          <Table
-            name="Fonts "
-            status="Active"
-            users="301"
-            completion="58%"
-          />
-          <Table
-            name="Source "
-            status="Draft"
-            users="0"
-            completion="-"
-          />
-        </div>
-
-      <div className="hidden md:block flex flex-col gap-10">
+      <div className="  ">
   {flows.map((flow) => (
     <Table
-      key={flow.name}
+      key={flow.id}
       name={flow.name}
       status={flow.status}
       users={flow.users}
