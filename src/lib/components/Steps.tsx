@@ -1,9 +1,9 @@
 const steps = [
   {target: "#landing-page",
-    title:"The whole landing",
-    description: "hlooo",
-    button: "next",
-    backbtn: "neh",
+    title:"Welcome",
+    description: "Let us show you around. This tour will walk you through everything you need to know.",
+    button: "Next",
+    backbtn: "Skip",
     number: 1
   },
  {

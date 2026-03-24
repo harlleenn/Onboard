@@ -15,7 +15,7 @@ interface Tour {
 export default function LandingPage({onStartTour,tourActive,setTourActive} : Tour) {
   return (
     <div className=" min-h-screen w-full
-     overflow-x-hidden bg-[hsl(0,0%,10%)]  flex flex-col items-center py-20 md:py-20 px-4 "  >
+     overflow-x-hidden bg-[hsl(0,0%,10%)]  flex flex-col items-center py-20 md:py-20 px-4  z-0"  >
       <div className="text-center w-full py-10 md:py-5 sm:w-full md:max-w-3xl  text-white" >
         <motion.div 
         initial={{opacity: 0}}

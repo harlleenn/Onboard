@@ -1,20 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import Popup from "./Popup";
-import { motion, useSpring, useMotionValue } from "motion/react";
-import { computePosition, flip, shift, offset } from "@floating-ui/dom";
-
+// import { motion, useSpring, useMotionValue } from "motion/react";
+import { computePosition, flip, shift, offset, arrow, autoPlacement } from "@floating-ui/dom";
+import { createPortal } from 'react-dom';
 interface Step {
-  target: string
-  title: string
-  description: string
-  button: string
-  number: number
-  backbtn: string
+  target: string;
+  title: string;
+  description: string;
+  button: string;
+  number: number;
+  backbtn: string;
 }
 
 interface SpotlightProps {
-  steps: Step[]
-  onFinish: () => void
+  steps: Step[];
+  onFinish: () => void;
 }
 
 export default function Spotlight({ steps, onFinish }: SpotlightProps) {
@@ -22,9 +22,6 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
   const [nextStep, setNextStep] = useState<number>(0);
 
   const floatingRef = useRef<HTMLDivElement>(null);
-
- 
-
 
   if (!steps || steps.length === 0) return null;
   if (nextStep >= steps.length) return null;
@@ -36,18 +33,13 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
 
   useEffect(() => {
     const elements = document.querySelector(steps[nextStep].target);
-    elements?.scrollIntoView()
-    
+    elements?.scrollIntoView();  // when i add behavior then it is not giving correct positioning that is the styling
+
     if (elements) {
       const elementPosition = elements.getBoundingClientRect();
       setPosition(elementPosition);
-      
-    
-    
-
     } else {
       setPosition(null);
-     
     }
   }, [nextStep]);
 
@@ -55,18 +47,24 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
     async function updatePosition() {
       if (!floatingRef.current) return;
       const targetElement = document.querySelector(steps[nextStep].target);
-      
+        // const arrowElement = document.getElementById('#arrow')
       if (!targetElement) return;
+      // if(!arrowElement) return ;
       const { x, y } = await computePosition(
         targetElement,
         floatingRef.current,
         {
-          placement: "bottom",
-          middleware: 
-          [offset(2), 
-            flip(), 
-            shift({ padding: 5})],
-        }
+          placement: "top",
+          middleware: [offset(2),
+             autoPlacement({
+              alignment: 'end',
+              autoAlignment: true,
+              // allowedPlacements: ['bottom', 'right']
+             }), 
+             shift({ padding: 5 }),
+            // arrow({element: arrowElement}),
+          ],
+        },
       );
 
       Object.assign(floatingRef.current.style, {
@@ -81,10 +79,12 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") {
-        nextStep === steps.length - 1 ? onFinish() : setNextStep(prev => prev + 1);
+        nextStep === steps.length - 1
+          ? onFinish()
+          : setNextStep((prev) => prev + 1);
       }
       if (e.key === "ArrowLeft") {
-        nextStep === 0 ? onFinish() : setNextStep(prev => prev - 1);
+        nextStep === 0 ? onFinish() : setNextStep((prev) => prev - 1);
       }
       if (e.key === "Escape") onFinish();
     };
@@ -96,33 +96,44 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
   if (!position) return null;
 
   const handleStep = () => {
-    nextStep === steps.length - 1 ? onFinish() : setNextStep(prev => prev + 1);
+    nextStep === steps.length - 1
+      ? onFinish()
+      : setNextStep((prev) => prev + 1);
   };
 
   const handleback = () => {
-    nextStep === 0 ? onFinish() : setNextStep(prev => prev - 1);
+    nextStep === 0 ? onFinish() : setNextStep((prev) => prev - 1);
   };
-
+  const arrowStyle = {
+     position: "absolute" as const,
+  background: "#222",
+  width: "8px",
+  height: "8px",
+  transform: "rotate(45deg)"
+  }
+// const spotlightCont = document.getElementById("spotlight-content")
   return (
     <div>
-      <div data-spotlight="">
-
-        {/* Spring-animated spotlight box */}
-        <motion.div
+      <div data-spotlight="" id="spotlight-content">
+ 
+        <div
           style={{
             position: "fixed",
             top: position.top,
             left: position.left,
             width: position.width,
             height: position.height,
-            boxShadow: "var(--onboard-spotlight-shadow, 0 0 0 9999px rgba(0,0,0,0.85))",
+            boxShadow:
+              "var(--onboard-spotlight-shadow, 0 0 0 9999px rgba(0,0,0,0.85))",
             zIndex: "var(--onboard-spotlight-zIndex, 40)",
-            backgroundColor: "var(--onboard-spotlight-bg, rgba(110, 109, 110, 0.17))",
+            backgroundColor:
+              "var(--onboard-spotlight-bg, rgba(110, 109, 110, 0.17))",
             borderRadius: 4,
           }}
+          
         />
-
-        <Popup
+{/* <div id="arrow" style={arrowStyle}>hiiiii</div> */}
+{createPortal(  <Popup
           ref={floatingRef}
           title={title}
           description={description}
@@ -133,7 +144,8 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
           handleStep={handleStep}
           onFinish={onFinish}
           handleback={handleback}
-        />
+        />, document.body)}
+       
       </div>
     </div>
   );

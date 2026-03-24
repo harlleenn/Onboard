@@ -12,6 +12,7 @@ interface PopupProps {
   onFinish: () => void
   totalSteps: number
   handleback : () => void
+
 }
 
 const Popup = forwardRef<HTMLDivElement, PopupProps>(({
@@ -23,9 +24,11 @@ const Popup = forwardRef<HTMLDivElement, PopupProps>(({
   number,
   onFinish,
   totalSteps, 
-  handleback
+  handleback,
+  
+},ref) => {
 
-}, ref) => {
+
 
   const popoverStyle = {
     position: "absolute" as const,
@@ -38,14 +41,15 @@ const Popup = forwardRef<HTMLDivElement, PopupProps>(({
     transitionProperty: "all",
     transitionDuration: "350ms",
     width: "clamp(100px, 70vw, 280px)",
+    
   };
 
   return (
     <div data-popover="">
-      <AnimatePresence>
-         <motion.div 
+         <div 
     
       style={popoverStyle} ref={ref}>
+      
         <div className="flex-col flex h-full justify-center gap-2 text-balance relative">
           <button
             className="cursor-pointer absolute top-0 right-0"
@@ -76,8 +80,8 @@ const Popup = forwardRef<HTMLDivElement, PopupProps>(({
             </div>
           </div>
         </div>
-      </motion.div>
-      </AnimatePresence>
+      </div>
+     
      
     </div>
   );
