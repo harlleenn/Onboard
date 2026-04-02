@@ -1,27 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import Popup from "./Popup";
-// import { motion, useSpring, useMotionValue } from "motion/react";
+import { motion, useSpring, useMotionValue } from "motion/react";
 import { computePosition, flip, shift, offset, arrow, autoPlacement } from "@floating-ui/dom";
-import { createPortal } from 'react-dom';
-interface Step {
-  target: string;
-  title: string;
-  description: string;
-  button: string;
-  number: number;
-  backbtn: string;
-}
 
-interface SpotlightProps {
-  steps: Step[];
-  onFinish: () => void;
-}
 
-export default function Spotlight({ steps, onFinish }: SpotlightProps) {
-  const [position, setPosition] = useState<DOMRect | null>(null);
-  const [nextStep, setNextStep] = useState<number>(0);
+export default function Spotlight({ steps, onFinish }) {
+  const [position, setPosition] = useState(null);
+  const [nextStep, setNextStep] = useState(0);
 
-  const floatingRef = useRef<HTMLDivElement>(null);
+  const floatingRef = useRef(null);
 
   if (!steps || steps.length === 0) return null;
   if (nextStep >= steps.length) return null;
@@ -54,14 +41,15 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
         targetElement,
         floatingRef.current,
         {
-          placement: "top",
-          middleware: [offset(2),
+          placement: "bottom",
+          middleware: [offset(12),
              autoPlacement({
-              alignment: 'end',
+              alignment: 'start',
+              crossAxis:true,
               autoAlignment: true,
-              // allowedPlacements: ['bottom', 'right']
+              
              }), 
-             shift({ padding: 5 }),
+             shift({ padding: 15 }),
             // arrow({element: arrowElement}),
           ],
         },
@@ -77,7 +65,7 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
   }, [nextStep, position]);
 
   useEffect(() => {
-    const handleKeydown = (e: KeyboardEvent) => {
+    const handleKeydown = (e) => {
       if (e.key === "ArrowRight") {
         nextStep === steps.length - 1
           ? onFinish()
@@ -104,17 +92,17 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
   const handleback = () => {
     nextStep === 0 ? onFinish() : setNextStep((prev) => prev - 1);
   };
-  const arrowStyle = {
-     position: "absolute" as const,
-  background: "#222",
-  width: "8px",
-  height: "8px",
-  transform: "rotate(45deg)"
-  }
-// const spotlightCont = document.getElementById("spotlight-content")
+  // const arrowStyle = {
+  //    position: "absolute" as const,
+  // background: "#222",
+  // width: "8px",
+  // height: "8px",
+  // transform: "rotate(45deg)"
+  // }
+
   return (
     <div>
-      <div data-spotlight="" id="spotlight-content">
+      <div data-spotlight="">
  
         <div
           style={{
@@ -133,7 +121,7 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
           
         />
 {/* <div id="arrow" style={arrowStyle}>hiiiii</div> */}
-{createPortal(  <Popup
+        <Popup
           ref={floatingRef}
           title={title}
           description={description}
@@ -144,8 +132,7 @@ export default function Spotlight({ steps, onFinish }: SpotlightProps) {
           handleStep={handleStep}
           onFinish={onFinish}
           handleback={handleback}
-        />, document.body)}
-       
+        />
       </div>
     </div>
   );

@@ -68,3 +68,20 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }  */
+
+[data-theme="dark"] {
+     --bg-color: #000000; /* Dark theme background color */
+  --text-color: #ffffff;
+}
+
+[data-theme="light"] {
+     --bg-color: #ede7e7; /* Dark theme background color */
+  --text-color: #ffffff;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+html{
+  background-color: var(--bg-color);
+}

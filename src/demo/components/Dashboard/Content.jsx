@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "./Card";
-import Table from "./Table";
+import Card from "./main-content/table-content/Card";
+import Table from "./main-content/table-content/Table";
 
 export default function Content({ onStartTour }) {
     const flows = [
@@ -11,7 +11,7 @@ export default function Content({ onStartTour }) {
 
 ]
   return (
-    <div className="bg-[hsl(0,0%,3%)] p-5 md:p-10 lg:p-15 flex-1 overflow-y-auto gap-10">
+    <div className="bg-[hsl(0,0%,3%)] p-5 md:p-10 lg:p-15 flex-1 overflow-y-auto gap-10" data-theme="dark">
       
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
         <div className="flex flex-col">
