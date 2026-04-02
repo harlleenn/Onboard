@@ -20,10 +20,10 @@ export default function Sidebar() {
   return (
   
       <div
-      className="bg-[hsl(0,0%,4%)]  relative border-r border-white/15 
+      className="bg-[hsl(0,0%,4%)]   border-r border-white/15 
       hidden md:inline-block md:w-56 lg:w-64" id="sideBar"  data-theme="dark" >
       <h1 className="text-white pl-2 text-base md:text-lg font-semibold p-5 md:p-7">Onboard</h1>
-      <div className="flex flex-col gap-1 p-1"  >
+      <div className="flex flex-col gap-1"  >
         {items.map((item) => (
           <div
             key={item.id}
@@ -33,7 +33,7 @@ export default function Sidebar() {
             onClick={() => setActive(item.title)}
           >
             {item.icon}
-            <span className="hidden md:inline">{item.title}</span>
+            <span className="">{item.title}</span>
           </div>
         ))}
       </div>

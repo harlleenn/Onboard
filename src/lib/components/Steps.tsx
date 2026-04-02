@@ -1,18 +1,12 @@
 const steps = [
-  {target: "#landing-page",
-    title:"Welcome",
-    description: "Let us show you around. This tour will walk you through everything you need to know.",
-    button: "Next",
-    backbtn: "Skip",
-    number: 1
-  },
+
  {
     target: "#sideBar",
     title: "Navigate Your Workspace",
     description: "Access all your flows and analytics from here.",
     button: "Next",
      backbtn: "Back",
-    number: 2
+    number: 1
   },
   {
     target: "#search",
@@ -20,7 +14,7 @@ const steps = [
     description: "Find any flow or user instantly.",
     button: "Next",
      backbtn: "Back",
-    number: 3
+    number: 2
     
   },
   {
@@ -29,7 +23,7 @@ const steps = [
     description: "Monitor your onboarding performance at a glance.",
     button: "Next",
     backbtn: "Back",
-     number: 4
+     number: 3
   },
   {
     target: "#flows-table",
@@ -37,7 +31,7 @@ const steps = [
     description: "See all your onboarding flows and their completion rates.",
     button: "Next",
      backbtn: "Back",
-     number: 5
+     number: 4
   },
    
   {
@@ -46,7 +40,14 @@ const steps = [
     description: "Build a new onboarding experience for your users.",
     button: "Next",
      backbtn: "Back",
-     number: 6
-  }
+     number: 5
+  },
+    {target: "#landing-page",
+    title:"Welcome",
+    description: "Let us show you around. This tour will walk you through everything you need to know.",
+    button: "Next",
+    backbtn: "Skip",
+    number:  6
+  },
 ]
 export default steps;
