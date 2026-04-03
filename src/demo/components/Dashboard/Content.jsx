@@ -15,17 +15,17 @@ const btnItems = [
    {id:4,  name: "Issues" },
 ]
   return (
-    <div className="bg-[hsl(0,0%,0%)] h-full " data-theme="dark">
+    <div className="bg-[hsl(0,0%,0%)] h-full p-10 sm:p-10 md:p-0 overflow-x-hidden" data-theme="dark">
       
-      <div className="flex flex-col md:flex-row md:justify-between p-5">
-        <div className="flex flex-col">
+      <div className="flex flex-col sm:gap-10 md:flex-row md:justify-between p-5 ">
+        <div className="flex flex-col gap-2 justify-between ">
           <div className="text-white font-bold text-xl md:text-2xl">Overview</div>
           <div className="text-gray-400 text-sm md:text-lg">
             Welcome back, Harleen. Here's what's happening.
           </div>
         </div>
 
-        <div className="flex  md:items-center" id="start-tour">
+        <div className="flex  mt-5 mx-auto sm:mx-auto md:items-center md:mt-0 " id="start-tour">
           <button
             className="text-black inset-shadow-2xs inset-shadow-amber-800 cursor-pointer 
             bg-[#f3f2f3] px-4 md:px-5 py-2 rounded-full font-semibold text-sm md:text-base w-full md:w-auto"
@@ -36,8 +36,8 @@ const btnItems = [
       </div>
 
        <div
-        className="  max-w-3xl mx-auto mt-5 gap-5
-        grid grid-cols-2  md:grid-cols-2  rounded-2xl "id="stats"
+        className="mx-auto sm:mx-auto md:max-w-3xl mt-5 gap-5
+        grid  grid-cols-1 mb-10 sm:grid-cols-2  md:grid-cols-2  rounded-2xl "id="stats"
       >
         <Card 
         number="12" 
@@ -60,18 +60,18 @@ const btnItems = [
         />
       </div>
 
-      <div className="flex mt-2 flex-col p-5" id="flows-table">
-        <div className="text-white mb-5  flex flex-row   gap-3 p-2 bg-[#1f1e1eaa] border-1 border-white/10">
+      <div className="flex mt-2 flex-col p-5 " id="flows-table">
+        <div className="text-white flex flex-row gap-3 p-2 mb-10 md:p-2  sm:mb:15 md:mb-10  bg-[#1f1e1eaa]  border-white/10">
          {btnItems.map((item) => 
-         <button key={item.id} className="px-2  flex flex-row border-2 border-white/10 ">
+         <button key={item.id} className="px-2  flex flex-row  border-2 border-white/10 ">
                 {item.name}
          </button>)}
          
-           <button>Add</button>
+          
          
         
         </div>
-        <div className=" grid grid-cols-2 border-b border-white/20 mb-5  border-white/5 text-white text-sm md:text-lg">
+        <div className=" grid grid-cols-2  mb-5 sm:grid-cols-2 md:grid-cols  text-white sm:text-md md:text-lg">
           <span>Name</span>
           <span>Owner</span>
         </div>

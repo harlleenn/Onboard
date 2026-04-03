@@ -6,8 +6,8 @@ import { AnimatePresence, motion } from "motion/react";
 
 export default function Popup ({title,description,button,backbtn,handleStep,number,onFinish,totalSteps,handleback,ref}) {
     const popoverStyle = {
-      position: "absolute",
-      
+      position: "absolute", // something ki when viewpor it tocuhes then it becomes stikcy
+      top:0,
       backgroundColor: "var(--onboard-popover-bg, rgba(22,22,22,0.98))",
       zIndex: "var(--onboard-popover-z, 9999)",
       color: "var(--onboard-popover-fg, white)",
