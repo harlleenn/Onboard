@@ -17,22 +17,29 @@ export default function Spotlight({ steps, onFinish }) {
 
   useEffect(() => {
     const elements = document.querySelector(steps[nextStep].target);
+   
+   
+   
     elements?.scrollIntoView(); // when i add behavior then it is not giving correct positioning that is the styling
 
     if (elements) {
       const elementPosition = elements.getBoundingClientRect();
       setPosition(elementPosition);
-      // if(elementPosition.top === 0){
-      // }
-      // console.log(elementPosition)
+      if(elementPosition.width === 0 && elementPosition.height === 0 ){
+     
+        setNextStep(nextStep+1) // here the condition that if doenst exist
+        
+      }
+    
     } else {
       setPosition(null);
-    }
+    
+    } 
   }, [nextStep]);
 
   useEffect(() => {
     if(!position) return
-    if (position.width === 0 && position.height === 0) return
+  
 
   //  console.log(elementPosition)
     function updatePosition() {
@@ -40,6 +47,7 @@ export default function Spotlight({ steps, onFinish }) {
       if (!floatingRef.current) return;
       // if(position.top === 0) return 
       const targetElement = document.querySelector(steps[nextStep].target);
+
       if (!targetElement) return;
 
       const overflowMiddleware = {
@@ -55,7 +63,7 @@ export default function Spotlight({ steps, onFinish }) {
           // console.log(state.middlewareData);
 
           if (overflow.bottom < -100) {
-            y += Math.abs(200);
+            y += Math.abs(overflow.bottom);
           }
            if(overflow.top < -100) {
             y -= Math.abs(overflow.top)
@@ -115,8 +123,7 @@ export default function Spotlight({ steps, onFinish }) {
 
   return (
     <div>
-      <div data-spotlight="">
-         {position && position.width > 0 && position.height > 0 &&
+      {position && position.width > 0 && position.height > 0 &&   <div data-spotlight="">
         <div
           style={{
             position: "fixed", // when it is ixed it is with respect
@@ -133,7 +140,7 @@ export default function Spotlight({ steps, onFinish }) {
             borderRadius: 4,
           }}
         />
-}
+
        
         <Popup
           ref={floatingRef}
@@ -148,9 +155,11 @@ export default function Spotlight({ steps, onFinish }) {
           handleback={handleback}
           position={position}
         />
-
-     
-      </div>
+      </div>}
+    
+        
     </div>
+        
   );
 }
+

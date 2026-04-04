@@ -32,8 +32,7 @@ export default function Popup ({title,
     return (
       
       <div data-popover="">
-      
-         <div style={popoverStyle} ref={ref}>
+        <div style={popoverStyle} ref={ref}>
           <div className="flex-col flex h-full justify-center gap-2 text-balance relative">
             <button
               className="cursor-pointer absolute top-0 right-0"
@@ -67,6 +66,7 @@ export default function Popup ({title,
             </div>
           </div>
         </div>
+        
         
       
       </div>
