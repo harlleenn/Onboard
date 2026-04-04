@@ -13,11 +13,10 @@ export default function Popup ({title,
   onFinish
   ,totalSteps
   ,handleback,
-  position,
   ref}) {
     const popoverStyle = {
       position: "absolute", // something ki when viewpor it tocuhes then it becomes stikcy
-      backgroundColor: "var(--onboard-popover-bg, red)",
+      backgroundColor: "var(--onboard-popover-bg, rgba(22,22,22,0.98))",
       zIndex: "var(--onboard-popover-z, 9999)",
       color: "var(--onboard-popover-fg, white)",
       borderRadius: "var(--onboard-popover-radius, 20px)",
@@ -26,12 +25,13 @@ export default function Popup ({title,
         "var(--onboard-popover-border, 0.3px solid rgba(255, 255,255,0.1))",
       transitionProperty: "all",
       transitionDuration: "350ms",
-      width: "clamp(100px, 50vw, 280px)",
+      width: "clamp(100px, 70vw, 280px)",
     };
 
     return (
       
       <div data-popover="">
+       
         <div style={popoverStyle} ref={ref}>
           <div className="flex-col flex h-full justify-center gap-2 text-balance relative">
             <button
@@ -66,9 +66,6 @@ export default function Popup ({title,
             </div>
           </div>
         </div>
-        
-        
-      
       </div>
     );
   }

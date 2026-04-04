@@ -17,35 +17,27 @@ export default function Spotlight({ steps, onFinish }) {
 
   useEffect(() => {
     const elements = document.querySelector(steps[nextStep].target);
-   
-   
-   
+
     elements?.scrollIntoView(); // when i add behavior then it is not giving correct positioning that is the styling
 
     if (elements) {
       const elementPosition = elements.getBoundingClientRect();
       setPosition(elementPosition);
-      if(elementPosition.width === 0 && elementPosition.height === 0 ){
-     
-        setNextStep(nextStep+1) // here the condition that if doenst exist
-        
+      if (elementPosition.width === 0 && elementPosition.height === 0) {
+        setNextStep(nextStep + 1); // here the condition that if doenst exist
       }
-    
     } else {
       setPosition(null);
-    
-    } 
+    }
   }, [nextStep]);
 
   useEffect(() => {
-    if(!position) return
-  
+    if (!position) return;
 
-  //  console.log(elementPosition)
+    //  console.log(elementPosition)
     function updatePosition() {
-      
       if (!floatingRef.current) return;
-      // if(position.top === 0) return 
+      // if(position.top === 0) return
       const targetElement = document.querySelector(steps[nextStep].target);
 
       if (!targetElement) return;
@@ -59,28 +51,27 @@ export default function Spotlight({ steps, onFinish }) {
 
           // Example: adjust position if overflowing top
           let { x, y } = state;
-          // console.log(state);
-          // console.log(state.middlewareData);
 
-          if (overflow.bottom < -100) {
-            y += Math.abs(overflow.bottom);
+          if (overflow.bottom > 0) { // it means that if 50px then means outside viewport then i need to pull it from the bottom so subtract 
+            y -= overflow.bottom;
           }
-           if(overflow.top < -100) {
-            y -= Math.abs(overflow.top)
-           }
+
+          if (overflow.top > 0) { //vice versa
+            y += overflow.top;
+          }
 
           return {
             x,
             y,
-            // data: {
-            //   overflow, // optional: store for debugging
-            // },
+            data: {
+              overflow, // optional: store for debugging
+            },
           };
         },
       };
       computePosition(targetElement, floatingRef.current, {
         placement: "bottom",
-        middleware: [flip({ boundary: "viewport" }), overflowMiddleware],
+        middleware: [overflowMiddleware],
       }).then(({ x, y }) => {
         Object.assign(floatingRef.current.style, {
           left: `${x}px`,
@@ -123,43 +114,40 @@ export default function Spotlight({ steps, onFinish }) {
 
   return (
     <div>
-      {position && position.width > 0 && position.height > 0 &&   <div data-spotlight="">
-        <div
-          style={{
-            position: "fixed", // when it is ixed it is with respect
-            // to the view port mabey when the user scrolls then it is absolute and popup sticky
-            top: position.top,
-            left: position.left,
-            width: position.width,
-            height: position.height,
-            boxShadow:
-              "var(--onboard-spotlight-shadow, 0 0 0 9999px rgba(0,0,0,0.85))",
-            zIndex: "var(--onboard-spotlight-zIndex, 40)",
-            backgroundColor:
-              "var(--onboard-spotlight-bg, rgba(110, 109, 110, 0.17))",
-            borderRadius: 4,
-          }}
-        />
+      {position && position.width > 0 && position.height > 0 && (
+        <div data-spotlight="">
+          <div
+            style={{
+              position: "fixed", // when it is ixed it is with respect
+              // to the view port mabey when the user scrolls then it is absolute and popup sticky
+              top: position.top,
+              left: position.left,
+              width: position.width,
+              height: position.height,
+              boxShadow:
+                "var(--onboard-spotlight-shadow, 0 0 0 9999px rgba(0,0,0,0.85))",
+              zIndex: "var(--onboard-spotlight-zIndex, 40)",
+              backgroundColor:
+                "var(--onboard-spotlight-bg, rgba(110, 109, 110, 0.17))",
+              borderRadius: 4,
+            }}
+          />
 
-       
-        <Popup
-          ref={floatingRef}
-          title={title}
-          description={description}
-          number={nextStep + 1}
-          button={button}
-          backbtn={backbtn}
-          totalSteps={steps.length}
-          handleStep={handleStep}
-          onFinish={onFinish}
-          handleback={handleback}
-          position={position}
-        />
-      </div>}
-    
-        
+          <Popup
+            ref={floatingRef}
+            title={title}
+            description={description}
+            number={nextStep + 1}
+            button={button}
+            backbtn={backbtn}
+            totalSteps={steps.length}
+            handleStep={handleStep}
+            onFinish={onFinish}
+            handleback={handleback}
+            
+          />
+        </div>
+      )}
     </div>
-        
   );
 }
-
