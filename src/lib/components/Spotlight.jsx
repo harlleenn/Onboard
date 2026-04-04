@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Popup from "./Popup";
-import { motion, useSpring, useMotionValue } from "motion/react";
 import { computePosition, flip, detectOverflow } from "@floating-ui/dom";
-import "./spotlight.css";
 export default function Spotlight({ steps, onFinish }) {
   const [position, setPosition] = useState(null);
   const [nextStep, setNextStep] = useState(0);
@@ -24,53 +22,63 @@ export default function Spotlight({ steps, onFinish }) {
     if (elements) {
       const elementPosition = elements.getBoundingClientRect();
       setPosition(elementPosition);
+      // if(elementPosition.top === 0){
+      // }
+      // console.log(elementPosition)
     } else {
-      setPosition("hii");
+      setPosition(null);
     }
   }, [nextStep]);
 
   useEffect(() => {
+    if(!position) return
+    if (position.width === 0 && position.height === 0) return
+
+  //  console.log(elementPosition)
     function updatePosition() {
+      
       if (!floatingRef.current) return;
+      // if(position.top === 0) return 
       const targetElement = document.querySelector(steps[nextStep].target);
       if (!targetElement) return;
+
       const overflowMiddleware = {
         name: "overflowMiddleware",
         async fn(state) {
           const overflow = await detectOverflow(state, {
-            rootBoundary: "document",
+            rootBoundary: "viewport",
           });
 
           // Example: adjust position if overflowing top
           let { x, y } = state;
-console.log(state)
-          // if (overflow.top < 0) {
-          //   y += Math.abs(overflow.top);
-          // }
-          padding: {
-            top: 5
+          // console.log(state);
+          // console.log(state.middlewareData);
+
+          if (overflow.bottom < -100) {
+            y += Math.abs(200);
           }
+           if(overflow.top < -100) {
+            y -= Math.abs(overflow.top)
+           }
 
           return {
             x,
             y,
-            data: {
-              overflow, // optional: store for debugging
-            },
+            // data: {
+            //   overflow, // optional: store for debugging
+            // },
           };
         },
       };
       computePosition(targetElement, floatingRef.current, {
-        placement: "top",
-        middleware: [flip(), overflowMiddleware],
+        placement: "bottom",
+        middleware: [flip({ boundary: "viewport" }), overflowMiddleware],
       }).then(({ x, y }) => {
         Object.assign(floatingRef.current.style, {
           left: `${x}px`,
           top: `${y}px`,
         });
       });
-
-    
     }
 
     updatePosition();
@@ -104,10 +112,11 @@ console.log(state)
   const handleback = () => {
     nextStep === 0 ? onFinish() : setNextStep((prev) => prev - 1);
   };
- 
+
   return (
     <div>
       <div data-spotlight="">
+         {position && position.width > 0 && position.height > 0 &&
         <div
           style={{
             position: "fixed", // when it is ixed it is with respect
@@ -124,7 +133,8 @@ console.log(state)
             borderRadius: 4,
           }}
         />
-      
+}
+       
         <Popup
           ref={floatingRef}
           title={title}
@@ -136,7 +146,10 @@ console.log(state)
           handleStep={handleStep}
           onFinish={onFinish}
           handleback={handleback}
+          position={position}
         />
+
+     
       </div>
     </div>
   );
