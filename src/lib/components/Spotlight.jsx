@@ -71,7 +71,7 @@ export default function Spotlight({ steps, onFinish }) {
       };
       computePosition(targetElement, floatingRef.current, {
         placement: "bottom",
-        middleware: [overflowMiddleware],
+        middleware: [flip(),overflowMiddleware],
       }).then(({ x, y }) => {
         Object.assign(floatingRef.current.style, {
           left: `${x}px`,

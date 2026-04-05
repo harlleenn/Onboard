@@ -4,9 +4,9 @@ import Table from "./main-content/table-content/Table";
 
 export default function Content({ onStartTour }) {
     const flows = [
-  {id:1 , name: "Bug Performance", owner: "Paul"},
-  { id:2, name: "Feature Discovery", owner:"Annee" },
-  {id:3,  name: "Mobile Walkthorugh", owner:"Patrick" },
+  {id:1 , name: "Isgnup Onboarding", status: "Active", users: "2.5 GB", completion: "50%" },
+  { id:2, name: "Feature Discovery", status: "Active", users: "1.2 GB", completion: "20%" },
+  {id:3,  name: "Mobile Walkthorugh", status: "Draft", users: "150 MB", completion: "30%" },
 ]
 const btnItems = [
    {id:1 , name: "Dashboard",  },
@@ -15,17 +15,18 @@ const btnItems = [
    {id:4,  name: "Issues" },
 ]
   return (
-    <div className="bg-[hsl(0,0%,0%)] h-full p-10 sm:p-10 md:p-0 overflow-x-hidden" data-theme="dark">
+    <div className="bg-[hsl(0,45%,2%)] flex flex-col flex-1 " data-theme="dark"> 
+    {/* i added flex here */}
       
-      <div className="flex flex-col sm:gap-10 md:flex-row md:justify-between p-5 ">
-        <div className="flex flex-col gap-2 justify-between ">
+      <div className="flex flex-col gap-10 md:flex-row md:justify-between p-5">
+        <div className="flex flex-col">
           <div className="text-white font-bold text-xl md:text-2xl">Overview</div>
           <div className="text-gray-400 text-sm md:text-lg">
             Welcome back, Harleen. Here's what's happening.
           </div>
         </div>
 
-        <div className="flex  mt-5 mx-auto sm:mx-auto md:items-center md:mt-0 " id="start-tour">
+        <div className="flex  md:items-center" id="start-tour">
           <button
             className="text-black inset-shadow-2xs inset-shadow-amber-800 cursor-pointer 
             bg-[#f3f2f3] px-4 md:px-5 py-2 rounded-full font-semibold text-sm md:text-base w-full md:w-auto"
@@ -36,8 +37,7 @@ const btnItems = [
       </div>
 
        <div
-        className="mx-auto sm:mx-auto md:max-w-3xl mt-5 gap-5
-        grid  grid-cols-1 mb-10 sm:grid-cols-2  md:grid-cols-2  rounded-2xl "id="stats"
+        className="mt-5 p-4 md:p-10 gap-3 md:gap-5 grid grid-cols-2  w-full max-w-full rounded-2xl  "id="stats"
       >
         <Card 
         number="12" 
@@ -60,32 +60,48 @@ const btnItems = [
         />
       </div>
 
-      <div className="flex mt-2 flex-col p-5 " id="flows-table">
-        <div className="text-white flex flex-row gap-3 p-2 mb-10 md:p-2  sm:mb:15 md:mb-10  bg-[#1f1e1eaa]  border-white/10">
-         {btnItems.map((item) => 
-         <button key={item.id} className="px-2  flex flex-row  border-2 border-white/10 ">
-                {item.name}
-         </button>)}
-         
-          
-         
-        
-        </div>
-        <div className=" grid grid-cols-2  mb-5 sm:grid-cols-2 md:grid-cols  text-white sm:text-md md:text-lg">
-          <span>Name</span>
-          <span>Owner</span>
-        </div>
+     <div className="flex flex-1 mt-5 flex-col p-5" id="flows-table">
 
-      <div className="  ">
-  {flows.map((flow) => (
-    <Table
-      key={flow.id}
-      name={flow.name}
-    owner={flow.owner}
-    />
-  ))}
+  
+  <div className="flex gap-3 overflow-x-auto pb-2">
+    {btnItems.map((item) => (
+      <button
+        key={item.id}
+        className="px-4 py-1.5 text-sm md:text-base text-white border border-white/10 rounded-md whitespace-nowrap hover:bg-white/10 transition"
+      >
+        {item.name}
+      </button>
+    ))}
+  </div>
+
+  
+  <div className="mt-4 overflow-x-auto">
+
+    {/* TABLE HEADER */}
+    <div className="min-w-[600px] grid grid-cols-4 text-gray-400 text-xs sm:text-sm md:text-base border-b border-white/10 pb-2">
+      <span>Name</span>
+      <span>Status</span>
+      <span>Users</span>
+      <span>Completion</span>
+    </div>
+
+  
+    <div className="flex flex-col gap-2 mt-2 min-w-[600px]">
+      {flows.map((flow) => (
+        <div
+          key={flow.id}
+          className="grid grid-cols-4 text-white text-xs sm:text-sm md:text-base py-2 border-b border-white/5"
+        >
+          <span className="truncate">{flow.name}</span>
+          <span>{flow.status}</span>
+          <span>{flow.users}</span>
+          <span>{flow.completion}</span>
+        </div>
+      ))}
+    </div>
+
+  </div>
 </div>
-      </div>  
     </div>
   );
 }

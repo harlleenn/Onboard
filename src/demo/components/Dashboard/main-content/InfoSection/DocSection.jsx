@@ -36,7 +36,7 @@ export default function DocSection() {
         </code>
       </pre>
 
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-2 text-wrap">
         <h1 className="text-base md:text-lg">Usage</h1>
 
         <div className="flex flex-col gap-5">

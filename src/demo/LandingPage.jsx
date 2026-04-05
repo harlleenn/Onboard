@@ -9,7 +9,7 @@ import DocSection from "./components/Dashboard/main-content/InfoSection/DocSecti
 
 export default function LandingPage({onStartTour,tourActive,setTourActive} ) {
   return (
-    <div className=" bg-[hsl(0,3%,7%)]  flex flex-col md:flex-col overflow-x-hidden items-center "  >
+    <div className=" bg-[hsl(0,0%,2%)] relative  flex flex-col overflow-x-auto items-center "  >
       <div className="text-center text-white p-5" >
         <div className="  flex flex-col p-5 gap-5 ">
           <div className="text-2xl sm:text-xl md:text-4xl font-semibold text-[hsl(0,0%,95%)]">
@@ -32,21 +32,19 @@ export default function LandingPage({onStartTour,tourActive,setTourActive} ) {
         </div>
       </div>
 
-      <div className="w-full relative sm:min-w-xl sm:px-5 sm:py-5 md:p-0
-       md:max-w-7xl rounded-xl 
-       overflow-hidden 
-       border border-[hsl(0,0%,0%)] shadow-lg shadow-white/20 mt-10"id="landing-page">
-        <div className=" flex">
+      <div className="w-full   sm:max-w-3xl md:max-w-7xl rounded-xl 
+      border border-[hsl(0,1%,40%)] shadow-lg shadow-white/20 mt-10 "id="landing-page">
+        <div className=" flex ">
           <Sidebar />
-          <div className="flex-1 flex-col">
+          <div className="flex-1 flex-col w-full">
             <Navbar />
             <Content onStartTour={onStartTour} />
           </div>
         </div>
       </div>
-      <div>
+      {/* <div>
           <DocSection />
-      </div>
+      </div> */}
     
 
   {tourActive && (
