@@ -10,9 +10,9 @@ import DocSection from "./components/Dashboard/main-content/InfoSection/DocSecti
 export default function LandingPage({onStartTour,tourActive,setTourActive} ) {
   return (
     <div className=" bg-[hsl(0,0%,2%)] relative  flex flex-col overflow-x-auto items-center "  >
-      <div className="text-center text-white p-5" >
+      <div className="text-left text-white p-5" >
         <div className="  flex flex-col p-5 gap-5 ">
-          <div className="text-2xl sm:text-xl md:text-4xl font-semibold text-[hsl(0,0%,95%)]">
+          <div className="text-2xl sm:text-xl md:text-4xl text-left font-semibold text-[hsl(0,0%,95%)]">
             Guide your users.
           </div>
           <div className="text-sm sm:text-md md:text-lg text-[hsl(0,0%,70%)]">
@@ -37,7 +37,7 @@ export default function LandingPage({onStartTour,tourActive,setTourActive} ) {
         <div className=" flex ">
           <Sidebar />
           <div className="flex-1 flex-col w-full">
-            <Navbar />
+            {/* <Navbar /> */}
             <Content onStartTour={onStartTour} />
           </div>
         </div>
