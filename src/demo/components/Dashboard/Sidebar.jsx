@@ -9,8 +9,8 @@ import {
   TagsIcon,
   ShareIcon,
   HelpCircle,
-  FilesIcon
-
+  FilesIcon,
+  Search,
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -26,7 +26,7 @@ export default function Sidebar() {
     { id: 8, title: "Tags", icon: <TagsIcon width={20} /> },
     { id: 9, title: "Shared with me", icon: <ShareIcon width={20} /> },
     { id: 10, title: "Settings", icon: <Settings width={20} /> },
-    { id: 8, title: "Help center", icon: <HelpCircle width={20} /> },
+    { id: 11, title: "Help center", icon: <HelpCircle width={20} /> },
   ];
   return (
     <div
@@ -38,19 +38,19 @@ export default function Sidebar() {
       <h1 className="text-white pl-2 text-base md:text-lg font-semibold p-5 md:p-7">
         Onboard
       </h1>
-        <div id="search" className="flex-1 md:flex min-h-0">
-          <input
-            placeholder="Quick Search "
-            className="h-9 md:h-10 w-full max-w-full md:w-56 p-2 rounded-lg bg-[hsl(0,0%,10%)] text-white border border-white/10 text-sm md:text-base"
-          />
-        </div>
+      <div id="search" className="flex-1 md:flex min-h-0 justify-center mb-10">
+        <input
+          placeholder="Quick Search"
+          className="h-9 md:h-10 w-full max-w-full md:w-56 p-2 rounded-lg bg-[hsl(0,0%,10%)] text-white border border-white/10 text-sm md:text-base"
+        />
+      </div>
       <div className="flex flex-col gap-1">
         {items.map((item) => (
           <div
             key={item.id}
             className={`flex flex-row gap-3 w-full h-[35px] text-center items-center cursor-pointer transition-all duration-[0.10]
          rounded-sm pl-2 text-sm md:text-base
-          ${item.title === active ? "bg-[hsl(0,0%,10%)] text-gray-100 border-l-1 border-white" : "text-gray-400 hover:text-gray-100 hover:bg-[hsl(0,0%,10%)]"}`}
+          ${item.title === active ? "bg-[hsl(0,0%,10%)] text-gray-100 border-l border-white" : "text-gray-400 hover:text-gray-100 hover:bg-[hsl(0,0%,10%)]"}`}
             onClick={() => setActive(item.title)}
           >
             {item.icon}

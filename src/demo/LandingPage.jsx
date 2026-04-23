@@ -37,7 +37,7 @@ export default function LandingPage({onStartTour,tourActive,setTourActive} ) {
         <div className=" flex ">
           <Sidebar />
           <div className="flex-1 flex-col w-full">
-            {/* <Navbar /> */}
+          
             <Content onStartTour={onStartTour} />
           </div>
         </div>
