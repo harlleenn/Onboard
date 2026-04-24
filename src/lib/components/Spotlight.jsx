@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import Popup from "./Popup";
-import { computePosition, flip, detectOverflow } from "@floating-ui/dom";
+import { computePosition, flip, detectOverflow, autoUpdate } from "@floating-ui/dom";
 export default function Spotlight({ steps, onFinish }) {
   const [position, setPosition] = useState(null);
   const [nextStep, setNextStep] = useState(0);
 
   const floatingRef = useRef(null);
 
-  if (!steps || steps.length === 0) return null;
   if (nextStep >= steps.length) return null;
 
   const title = steps[nextStep].title;
@@ -17,31 +16,38 @@ export default function Spotlight({ steps, onFinish }) {
 
   useEffect(() => {
     const elements = document.querySelector(steps[nextStep].target);
-
-    elements?.scrollIntoView(); // when i add behavior then it is not giving correct positioning that is the styling
+    elements?.scrollIntoView();
 
     if (elements) {
       const elementPosition = elements.getBoundingClientRect();
       setPosition(elementPosition);
+
       if (elementPosition.width === 0 && elementPosition.height === 0) {
-        setNextStep(nextStep + 1); // here the condition that if doenst exist
+        setNextStep(nextStep + 1);
+        // onFinish()
       }
     } else {
+
+      setNextStep(nextStep + 1)
       setPosition(null);
+    
+      // onFinish()
     }
   }, [nextStep]);
 
   useEffect(() => {
-    if (!position) return;
+     if (!floatingRef.current) return;
 
-    //  console.log(elementPosition)
-    function updatePosition() {
-      if (!floatingRef.current) return;
-      // if(position.top === 0) return
       const targetElement = document.querySelector(steps[nextStep].target);
-
-      if (!targetElement) return;
-
+      
+      // if (!targetElement) return;
+      if(!targetElement) return;
+      // if(!position) return;
+      
+    function updatePosition() {
+       const updatedPosition = targetElement.getBoundingClientRect();
+  setPosition(updatedPosition); // spotlight follows on scroll
+      // setPosition(updatedElementPosition)
       const overflowMiddleware = {
         name: "overflowMiddleware",
         async fn(state) {
@@ -52,11 +58,13 @@ export default function Spotlight({ steps, onFinish }) {
           // Example: adjust position if overflowing top
           let { x, y } = state;
 
-          if (overflow.bottom > 0) { // it means that if 50px then means outside viewport then i need to pull it from the bottom so subtract 
+          if (overflow.bottom > 0) {
+            // it means that if 50px then means outside viewport then i need to pull it from the bottom so subtract
             y -= overflow.bottom;
           }
 
-          if (overflow.top > 0) { //vice versa
+          if (overflow.top > 0) {
+            //vice versa
             y += overflow.top;
           }
 
@@ -71,17 +79,21 @@ export default function Spotlight({ steps, onFinish }) {
       };
       computePosition(targetElement, floatingRef.current, {
         placement: "bottom",
-        middleware: [flip(),overflowMiddleware],
+        middleware: [flip(), overflowMiddleware],
       }).then(({ x, y }) => {
         Object.assign(floatingRef.current.style, {
           left: `${x}px`,
           top: `${y}px`,
         });
       });
+      
     }
 
     updatePosition();
-  }, [nextStep, position]);
+  
+    const cleanup = autoUpdate(targetElement, floatingRef.current,  updatePosition);
+    return cleanup;
+  }, [nextStep ]);
 
   useEffect(() => {
     const handleKeydown = (e) => {
@@ -100,7 +112,7 @@ export default function Spotlight({ steps, onFinish }) {
     return () => document.removeEventListener("keydown", handleKeydown);
   }, [nextStep]);
 
-  if (!position) return null;
+  // if (!position) return null;
 
   const handleStep = () => {
     nextStep === steps.length - 1
@@ -110,6 +122,7 @@ export default function Spotlight({ steps, onFinish }) {
 
   const handleback = () => {
     nextStep === 0 ? onFinish() : setNextStep((prev) => prev - 1);
+    console.log(nextStep);
   };
 
   return (
@@ -144,7 +157,6 @@ export default function Spotlight({ steps, onFinish }) {
             handleStep={handleStep}
             onFinish={onFinish}
             handleback={handleback}
-            
           />
         </div>
       )}

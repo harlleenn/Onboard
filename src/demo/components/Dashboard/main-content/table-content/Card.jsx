@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Card({notebook, title, todo}) {
   return (
-    <div className=' h-50'>
+    <div className='h-50'>
           <div className='flex flex-row   rounded-2xl h-full   border-1 border-white/20  hover:bg-[#2c2b2bdf] ' >
         <div className=" text-white rounded-lg flex flex-col p-5  ">
           {/* <div className='flex flex-row'>

@@ -51,7 +51,7 @@ const btnItems = [
     
 
       </div>
-<div className=" m-5 rounded-xl border-1 border-white/10">
+<div className=" m-5 rounded-xl border-1 border-white/10" id="stats">
   <div className="text-xl  p-2 font-semibold">Notes</div>
   <div className="flex flex-row gap-2 rounded-2xl flex-1 border-white/5 m-5">
       <Card 

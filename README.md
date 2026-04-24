@@ -8,7 +8,9 @@ Spotlight onboarding component for React. Guide your users through your app with
 ```bash
 npx shadcn add https://onboard-uii.vercel.app/registry/spotlight.json
 ```
-
+when resize it wont go or adjust
+when clicking back it wont go back cause !targetElement return null need to do that it moves to the next element
+main issue is now when it does not exist ok done but  now when we resize
 ## Usage
 ```jsx
 import { useState } from 'react'

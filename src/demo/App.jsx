@@ -10,7 +10,7 @@ function App() {
   return (
   <>
    <LandingPage
-  onStartTour={() => setTourActive(true)}
+  onStartTour={() => setTourActive(true) }
   tourActive={tourActive}
   setTourActive={setTourActive}
 />
