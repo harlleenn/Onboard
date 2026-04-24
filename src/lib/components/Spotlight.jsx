@@ -41,13 +41,14 @@ export default function Spotlight({ steps, onFinish }) {
       const targetElement = document.querySelector(steps[nextStep].target);
       
       // if (!targetElement) return;
-      if(!targetElement) return;
-      // if(!position) return;
+      // if(!targetElement) return;
+      if(!position) return;
       
     function updatePosition() {
        const updatedPosition = targetElement.getBoundingClientRect();
-  setPosition(updatedPosition); // spotlight follows on scroll
+      setPosition(updatedPosition); // spotlight follows on scroll
       // setPosition(updatedElementPosition)
+      if(!position) return ;
       const overflowMiddleware = {
         name: "overflowMiddleware",
         async fn(state) {

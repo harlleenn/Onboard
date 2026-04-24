@@ -1,5 +1,5 @@
 import Sidebar from "./components/Dashboard/Sidebar";
-import Navbar from "./components/Dashboard/Navbar";
+// import Navbar from "./components/Dashboard/Navbar";
 import Content from "./components/Dashboard/Content";
 import Spotlight from "../lib/components/Spotlight";
 import steps from "../lib/components/Steps";

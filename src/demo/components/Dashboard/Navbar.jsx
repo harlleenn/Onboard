@@ -5,7 +5,7 @@ export default function Navbar() {
 
 
   return (
-    <div className="bg-[hsl(0,0%,0%)]  flex-1
+    <div className="bg-[hsl(0,83%,28%)]  flex-1
      h-14 md:h-16 border-b border-white/15 p-2 md:p-3" >
       {/* <div className="flex flex-row justify-between h-full px-2 md:px-5 gap-3">
         

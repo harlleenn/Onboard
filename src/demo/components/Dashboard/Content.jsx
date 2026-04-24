@@ -20,13 +20,13 @@ const btnItems = [
     {/* i added flex here */}
       
        
-      <div className="flex flex-row gap-10 md:flex-row md:justify-between p-5">
+      <div className="flex flex-col m-10  justify-center gap-10 md:flex-row md:justify-between p-5 ">
          <div className="flex flex-col">
           <div className="text-white font-bold text-xl md:text-2xl">Overview</div>
           <div className="text-gray-400 text-sm md:text-lg">
             Welcome back, Harleen. Here's what's happening.
           </div>
-             <div className="flex gap-3 flex-row overflow-x-auto mt-10">
+             <div className="flex gap-3 min-w-3xs flex-col md:flex-row overflow-x-auto mt-10">
     {btnItems.map((item) => (
       <button
         key={item.id}
@@ -42,7 +42,7 @@ const btnItems = [
          <div className="flex  md:items-center" id="start-tour">
           <button
             className="text-black inset-shadow-2xs inset-shadow-amber-800 cursor-pointer 
-            bg-[#f3f2f3] px-4 md:px-5 py-2 rounded-full font-semibold text-sm md:text-base w-full md:w-auto"
+            bg-[#f3f2f3] px-4 md:px-5 py-2 rounded-full font-semibold text-sm md:text-base  md:w-auto"
             onClick={() => onStartTour()}>
             Start tour
           </button>
@@ -53,7 +53,7 @@ const btnItems = [
       </div>
 <div className=" m-5 rounded-xl border-1 border-white/10" id="stats">
   <div className="text-xl  p-2 font-semibold">Notes</div>
-  <div className="flex flex-row gap-2 rounded-2xl flex-1 border-white/5 m-5">
+  <div className="flex flex-col md:flex-row gap-2 rounded-2xl flex-1 border-white/5 m-5">
       <Card 
         notebook="Notebook" 
         title="Website Redesign" 
