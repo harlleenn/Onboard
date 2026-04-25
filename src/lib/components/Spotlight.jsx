@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import Popup from "./Popup";
 import { computePosition, flip, detectOverflow, autoUpdate } from "@floating-ui/dom";
+
 export default function Spotlight({ steps, onFinish }) {
   const [position, setPosition] = useState(null);
   const [nextStep, setNextStep] = useState(0);
-
   const floatingRef = useRef(null);
+  const cleanupRef = useRef(null);
 
   if (nextStep >= steps.length) return null;
 
@@ -14,94 +15,83 @@ export default function Spotlight({ steps, onFinish }) {
   const button = steps[nextStep].button;
   const backbtn = steps[nextStep].backbtn;
 
+  // effect 1 - measure target
   useEffect(() => {
-    const elements = document.querySelector(steps[nextStep].target);
-    elements?.scrollIntoView();
+    const element = document.querySelector(steps[nextStep].target);
 
-    if (elements) {
-      const elementPosition = elements.getBoundingClientRect();
-      setPosition(elementPosition);
+    if (!element) {
+      nextStep < steps.length - 1 ? setNextStep((prev) => prev + 1) : onFinish();
+      return;
+    }
+
+    element.scrollIntoView();
+
+    const raf = requestAnimationFrame(() => {
+      const elementPosition = element.getBoundingClientRect();
 
       if (elementPosition.width === 0 && elementPosition.height === 0) {
-        setNextStep(nextStep + 1);
-        // onFinish()
+        nextStep < steps.length - 1 ? setNextStep((prev) => prev + 1) : onFinish();
+        return;
       }
-    } else {
 
-      setNextStep(nextStep + 1)
-      setPosition(null);
-    
-      // onFinish()
-    }
+      setPosition(elementPosition);
+    });
+
+    return () => cancelAnimationFrame(raf);
   }, [nextStep]);
 
+  // effect 2 - position popup
   useEffect(() => {
-     if (!floatingRef.current) return;
+    if (!position) return;
 
-      const targetElement = document.querySelector(steps[nextStep].target);
-      
-      // if (!targetElement) return;
-      // if(!targetElement) return;
-      if(!position) return;
-      
+    const targetElement = document.querySelector(steps[nextStep].target);
+    if (!targetElement) return;
+
+    const overflowMiddleware = {
+      name: "overflowMiddleware",
+      async fn(state) {
+        const overflow = await detectOverflow(state, { rootBoundary: "viewport" });
+        let { x, y } = state;
+        if (overflow.bottom > 0) y -= overflow.bottom;
+        if (overflow.top > 0) y += overflow.top;
+        return { x, y };
+      },
+    };
+
     function updatePosition() {
-       const updatedPosition = targetElement.getBoundingClientRect();
-      setPosition(updatedPosition); // spotlight follows on scroll
-      // setPosition(updatedElementPosition)
-      if(!position) return ;
-      const overflowMiddleware = {
-        name: "overflowMiddleware",
-        async fn(state) {
-          const overflow = await detectOverflow(state, {
-            rootBoundary: "viewport",
-          });
+      if (!floatingRef.current) return;
 
-          // Example: adjust position if overflowing top
-          let { x, y } = state;
+      const updatedPosition = targetElement.getBoundingClientRect();
+      setPosition(updatedPosition);
 
-          if (overflow.bottom > 0) {
-            // it means that if 50px then means outside viewport then i need to pull it from the bottom so subtract
-            y -= overflow.bottom;
-          }
-
-          if (overflow.top > 0) {
-            //vice versa
-            y += overflow.top;
-          }
-
-          return {
-            x,
-            y,
-            data: {
-              overflow, // optional: store for debugging
-            },
-          };
-        },
-      };
       computePosition(targetElement, floatingRef.current, {
         placement: "bottom",
         middleware: [flip(), overflowMiddleware],
       }).then(({ x, y }) => {
+        if (!floatingRef.current) return;
         Object.assign(floatingRef.current.style, {
           left: `${x}px`,
           top: `${y}px`,
         });
       });
-      
     }
 
-    updatePosition();
-  
-    const cleanup = autoUpdate(targetElement, floatingRef.current,  updatePosition);
-    return cleanup;
-  }, [nextStep ]);
+    const raf = requestAnimationFrame(() => {
+      updatePosition();
+      cleanupRef.current = autoUpdate(targetElement, floatingRef.current, updatePosition);
+    });
 
+    return () => {
+      cancelAnimationFrame(raf);
+      cleanupRef.current?.();
+    };
+  }, [position]);
+
+  // effect 3 - keyboard nav
   useEffect(() => {
     const handleKeydown = (e) => {
       if (e.key === "ArrowRight") {
-        nextStep === steps.length - 1
-          ? onFinish()
-          : setNextStep((prev) => prev + 1);
+        nextStep === steps.length - 1 ? onFinish() : setNextStep((prev) => prev + 1);
       }
       if (e.key === "ArrowLeft") {
         nextStep === 0 ? onFinish() : setNextStep((prev) => prev - 1);
@@ -113,17 +103,12 @@ export default function Spotlight({ steps, onFinish }) {
     return () => document.removeEventListener("keydown", handleKeydown);
   }, [nextStep]);
 
-  // if (!position) return null;
-
   const handleStep = () => {
-    nextStep === steps.length - 1
-      ? onFinish()
-      : setNextStep((prev) => prev + 1);
+    nextStep === steps.length - 1 ? onFinish() : setNextStep((prev) => prev + 1);
   };
 
   const handleback = () => {
     nextStep === 0 ? onFinish() : setNextStep((prev) => prev - 1);
-    console.log(nextStep);
   };
 
   return (
@@ -132,21 +117,17 @@ export default function Spotlight({ steps, onFinish }) {
         <div data-spotlight="">
           <div
             style={{
-              position: "fixed", // when it is ixed it is with respect
-              // to the view port mabey when the user scrolls then it is absolute and popup sticky
+              position: "fixed",
               top: position.top,
               left: position.left,
               width: position.width,
               height: position.height,
-              boxShadow:
-                "var(--onboard-spotlight-shadow, 0 0 0 9999px rgba(0,0,0,0.85))",
+              boxShadow: "var(--onboard-spotlight-shadow, 0 0 0 9999px rgba(0,0,0,0.85))",
               zIndex: "var(--onboard-spotlight-zIndex, 40)",
-              backgroundColor:
-                "var(--onboard-spotlight-bg, rgba(110, 109, 110, 0.17))",
+              backgroundColor: "var(--onboard-spotlight-bg, rgba(110, 109, 110, 0.17))",
               borderRadius: 4,
             }}
           />
-
           <Popup
             ref={floatingRef}
             title={title}

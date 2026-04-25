@@ -1,5 +1,11 @@
 const steps = [
-
+ {target: "#landing-page",
+    title:"Welcome",
+    description: "Let us show you around. This tour will walk you through everything you need to know.",
+    button: "Next",
+    backbtn: "Skip",
+    number:  1
+  },
  {
     target: "#sideBar",
     title: "Navigate Your Workspace",
@@ -42,12 +48,6 @@ const steps = [
      backbtn: "Back",
      number: 5
   },
-    {target: "#landing-page",
-    title:"Welcome",
-    description: "Let us show you around. This tour will walk you through everything you need to know.",
-    button: "Next",
-    backbtn: "Skip",
-    number:  6
-  },
+   
 ]
 export default steps;

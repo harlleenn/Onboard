@@ -44,21 +44,21 @@ export default function Popup ({title,
             <div className="text-lg font-semibold">{title}</div>
             <div className="text-md text-gray-200">{description}</div>
             <div className="flex mt-5">
-              <div className="flex flex-row w-full justify-between p-1">
+              <div className="flex flex-col  p-1">
                 <div>
                   Steps {number} of {totalSteps}
                 </div>
                 <button
                   onClick={handleback}
                   type="button"
-                  className="bg-[#0d0d0daa] rounded-full text-white cursor-pointer px-6 py-1 border-1 border-white/5"
+                  className="bg-[#0d0d0daa]  text-white cursor-pointer px-6 md:px-4 md:py-1 border-1 border-white/5"
                 >
                   {backbtn}
                 </button>
                 <button
                   onClick={handleStep}
                   type="button"
-                  className="bg-[#0d0d0daa] rounded-full text-white cursor-pointer px-6 py-1 border-1 border-white/5"
+                  className="bg-[#0d0d0daa] text-white cursor-pointer px-6  md:px-6 md:py-1 border-1 border-white/5"
                 >
                   {button}
                 </button>
