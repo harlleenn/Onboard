@@ -33,9 +33,9 @@ export default function Popup ({title,
       <div data-popover="">
        
         <div style={popoverStyle} ref={ref}>
-          <div className="flex-col flex h-full justify-center gap-2 text-balance relative">
+          <div className="flex-col flex p-2 text-balance relative">
             <button
-              className="cursor-pointer absolute top-0 right-0"
+              className="cursor-pointer absolute top-0 right-0 "
               onClick={onFinish}
               type="button"
             >
@@ -44,11 +44,12 @@ export default function Popup ({title,
             <div className="text-lg font-semibold">{title}</div>
             <div className="text-md text-gray-200">{description}</div>
             <div className="flex mt-5">
-              <div className="flex flex-col  p-1">
+              <div className="flex flex-col ">
                 <div>
                   Steps {number} of {totalSteps}
                 </div>
-                <button
+                <div className="flex flex-row mt-5 gap-3">
+                       <button
                   onClick={handleback}
                   type="button"
                   className="bg-[#0d0d0daa]  text-white cursor-pointer px-6 md:px-4 md:py-1 border-1 border-white/5"
@@ -62,6 +63,8 @@ export default function Popup ({title,
                 >
                   {button}
                 </button>
+                </div>
+           
               </div>
             </div>
           </div>
