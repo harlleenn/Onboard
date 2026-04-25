@@ -52,7 +52,7 @@ export default function Popup ({title,
                        <button
                   onClick={handleback}
                   type="button"
-                  className="bg-[#0d0d0daa]  text-white cursor-pointer px-6 md:px-4 md:py-1 border-1 border-white/5"
+                  className="bg-[#0d0d0daa]  text-white cursor-pointer px-6 py-2 md:px-4 md:py-1 border-1 border-white/5"
                 >
                   {backbtn}
                 </button>
